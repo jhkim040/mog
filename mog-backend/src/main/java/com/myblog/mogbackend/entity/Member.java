@@ -24,7 +24,7 @@ public class Member {
     @Column(nullable = false)
     private String nickname;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String message;
 
     @Enumerated(EnumType.STRING)

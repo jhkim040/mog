@@ -19,5 +19,5 @@ spring:
         format_sql: true
         show_sql: true
 
-  jwt:
-    secret: qwertyuiop123456789qwertyuiop123456789qwertyuiop123456789
+jwt:
+  secret: qwertyuiop123456789qwertyuiop123456789qwertyuiop123456789
