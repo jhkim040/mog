@@ -1,9 +1,9 @@
 import { Button, Form } from "react-bootstrap";
 import React from "react";
-import { ButtonStyle } from "../components/common/ButtonStyle";
-import { FormWrap } from "../components/common/FormWrap";
-import { FlexBox } from "../components/common/FlexBox";
-import { FormLogo } from "../components/common/FormLogo";
+import { ButtonStyle } from "../components/common/formStyle/ButtonStyle";
+import { FormWrap } from "../components/common/formStyle/FormWrap";
+import { FlexBox } from "../components/common/formStyle/FlexBox";
+import { FormLogo } from "../components/common/formStyle/FormLogo";
 
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";

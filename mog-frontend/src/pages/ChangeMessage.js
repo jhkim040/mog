@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ButtonStyle } from "../components/common/ButtonStyle";
-import { FlexBox } from "../components/common/FlexBox";
-import { FormLogo } from "../components/common/FormLogo";
-import { FormWrap } from "../components/common/FormWrap";
+import { ButtonStyle } from "../components/common/formStyle/ButtonStyle";
+import { FlexBox } from "../components/common/formStyle/FlexBox";
+import { FormLogo } from "../components/common/formStyle/FormLogo";
+import { FormWrap } from "../components/common/formStyle/FormWrap";
 import { change_message } from "../components/store/member";
 
 const ChangeMessage = () => {

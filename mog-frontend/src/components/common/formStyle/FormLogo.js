@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import MogLogo from "../../images/MogLogo1.png";
+import MogLogo from "../../../images/MogLogo1.png";
+
+// Logo Style for Logos with Forms
 
 export const FormLogo = styled.div`
   width: 200px;
