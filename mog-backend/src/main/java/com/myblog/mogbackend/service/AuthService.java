@@ -25,8 +25,12 @@ public class AuthService {
 
     // 회원가입
     public MemberResponseDto signup(MemberRequestDto requestDto) {
+        // 한 개의 이메일 당 하나의 계정
+        if(requestDto.getEmail().trim() == "" || requestDto.getNickname().trim() == "" || requestDto.getPassword().trim() == "") {
+            throw new RuntimeException("a blank value exists");
+        }
         if(memberRepository.existsByEmail(requestDto.getEmail())) {
-            throw new RuntimeException("이미 가입되어 있는 유저입니다");
+            throw new RuntimeException("already our member");
         }
         Member member = requestDto.toMember(passwordEncoder);
         return MemberResponseDto.of(memberRepository.save(member));

@@ -1,46 +1,46 @@
 import axios from "axios";
 import React, { useContext, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ButtonStyle } from "../components/common/ButtonStyle";
-import { EmailContext } from "../components/context/EmailProvider";
-
-import { HttpHeadersContext } from "../components/context/HttpHeadersProviders";
-import { NicknameContext } from "../components/context/NicknameProvider";
+import { FlexBox } from "../components/common/FlexBox";
+import { FormLogo } from "../components/common/FormLogo";
+import { FormWrap } from "../components/common/FormWrap";
+import { delete_account, login, logout } from "../components/store/member";
 
 const Main = () => {
+  const { email, nickname, message, accessToken, isLogin } = useSelector(
+    (state) => state.member
+  );
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { headers, setHeaders } = useContext(HttpHeadersContext);
-  const { email, setEmail } = useContext(EmailContext);
-  const { nickname, setNickname } = useContext(NicknameContext);
 
   useEffect(() => {
     axios
       .get("/member/me", {
-        headers: headers,
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ` + localStorage.getItem("accessToken"),
+        },
       })
       .then((res) => res.data)
       .then((res) => {
-        setEmail(res.email);
-        setNickname(res.nickname);
+        dispatch(login(res));
       })
       .catch((err) => console.log(err));
   }, []);
 
   const onLogoutHandler = () => {
-    localStorage.clear();
+    // localStorage.clear();
     alert("로그아웃 완료");
-
-    setEmail(null);
-    setHeaders(null);
-    setNickname(null);
-
+    dispatch(logout());
     navigate("/");
   };
 
   const DeleteAccountHandler = async () => {
     await axios
-      .delete("/member/delete/" + localStorage.getItem("email"))
+      .delete("/member/delete/" + email)
       .then((res) => {
         console.log(res);
         return res.data;
@@ -48,13 +48,9 @@ const Main = () => {
       .then((res) => {
         console.log(res);
         if (res === "ok") {
-          localStorage.clear();
+          // localStorage.clear();
           alert("회원탈퇴 완료");
-
-          setEmail(null);
-          setHeaders(null);
-          setNickname(null);
-
+          dispatch(delete_account());
           navigate("/");
         }
       })
@@ -65,41 +61,60 @@ const Main = () => {
   };
 
   return (
-    <>
-      <h1>Main Page</h1>
-      <h2>Hello, {nickname}!</h2>
-      <Button variant="primary" type="button" onClick={onLogoutHandler}>
-        Logout
-      </Button>
-      <Button
-        variant="secondary"
-        type="button"
-        style={ButtonStyle}
-        onClick={DeleteAccountHandler}
-      >
-        Delete Account
-      </Button>
-      <Button
-        variant="primary"
-        type="button"
-        style={ButtonStyle}
-        onClick={() => {
-          navigate("/nickname");
-        }}
-      >
-        Change Nickname
-      </Button>
-      <Button
-        variant="secondary"
-        type="button"
-        style={ButtonStyle}
-        onClick={() => {
-          navigate("/password");
-        }}
-      >
-        Change Password
-      </Button>
-    </>
+    <FormWrap>
+      <FormLogo />
+      <h2>
+        {nickname} {message && " : " + message}
+      </h2>
+      <div style={FlexBox}>
+        <Button
+          variant="primary"
+          type="button"
+          style={ButtonStyle}
+          onClick={onLogoutHandler}
+        >
+          Logout
+        </Button>
+        <Button
+          variant="secondary"
+          type="button"
+          style={ButtonStyle}
+          onClick={DeleteAccountHandler}
+        >
+          DELETE
+        </Button>
+        <Button
+          variant="primary"
+          type="button"
+          style={ButtonStyle}
+          onClick={() => {
+            navigate("/nickname");
+          }}
+        >
+          Nickname
+        </Button>
+        <Button
+          variant="secondary"
+          type="button"
+          style={ButtonStyle}
+          onClick={() => {
+            navigate("/password");
+          }}
+        >
+          Password
+        </Button>
+        <Button
+          variant="primary"
+          type="button"
+          style={ButtonStyle}
+          onClick={() => {
+            navigate("/message");
+          }}
+        >
+          Message
+        </Button>
+      </div>
+    </FormWrap>
   );
 };
 

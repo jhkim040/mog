@@ -25,6 +25,9 @@ public class MemberService {
     // 닉네임 변경
     @Transactional
     public MemberResponseDto changeMemberNickname(String email, String nickname) {
+        if(nickname.trim() == "") {
+            throw new RuntimeException("nickname blank");
+        }
         Member member = memberRepository.findByEmail(email).
                 orElseThrow(() -> new RuntimeException("no such member"));
         member.setNickname(nickname);
@@ -35,6 +38,9 @@ public class MemberService {
     @Transactional
     public MemberResponseDto changeMemberPassword(String email, String exPassword, String newPassword) {
 //        Member member = memberRepository.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
+        if(newPassword.trim() == "") {
+            throw new RuntimeException("new password blank");
+        }
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("no such member"));
 

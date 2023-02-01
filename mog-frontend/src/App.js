@@ -2,23 +2,22 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Main from "./pages/Main";
-import HttpHeadersProviders from "./components/context/HttpHeadersProviders";
-import NicknameProvider from "./components/context/NicknameProvider";
-import EmailProvider from "./components/context/EmailProvider";
+import Signup from "./pages/Signup";
+import ChangePassword from "./pages/ChangePassword";
+import ChangeNickname from "./pages/ChangeNickname";
+import ChangeMessage from "./pages/ChangeMessage";
 
 function App() {
   return (
     <BrowserRouter>
-      <EmailProvider>
-        <HttpHeadersProviders>
-          <NicknameProvider>
-            <Routes>
-              <Route path="/" exact={true} element={<Login />} />
-              <Route path="/user" exact={true} element={<Main />} />
-            </Routes>
-          </NicknameProvider>
-        </HttpHeadersProviders>
-      </EmailProvider>
+      <Routes>
+        <Route path="/" exact={true} element={<Login />} />
+        <Route path="/signup" exact={true} element={<Signup />} />
+        <Route path="/user" exact={true} element={<Main />} />
+        <Route path="/password" exact={true} element={<ChangePassword />} />
+        <Route path="/nickname" exact={true} element={<ChangeNickname />} />
+        <Route path="/message" exact={true} element={<ChangeMessage />} />
+      </Routes>
     </BrowserRouter>
   );
 }
