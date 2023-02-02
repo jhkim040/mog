@@ -62,9 +62,8 @@ public class MemberController {
     }
 
 
-    @DeleteMapping("/delete/{email}")
-    public ResponseEntity<?> deleteByEmail(@PathVariable String email) {
-        log.info(email);
-        return new ResponseEntity<>(memberService.deleteByEmail(email), HttpStatus.OK);
+    @PostMapping("/delete")
+    public ResponseEntity<?> deleteByEmailandPw(@RequestBody MemberRequestDto request) {
+        return new ResponseEntity<>(memberService.deleteByEmailandPw(request.getEmail(), request.getPassword()), HttpStatus.OK);
     }
 }

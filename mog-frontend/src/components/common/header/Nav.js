@@ -1,9 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import searchIcon from "../../../images/search_icon.png";
-import userPhotoImg from "../../../images/user_profile(48px).png";
+import React from 'react';
+import styled from 'styled-components';
+import searchIcon from '../../../images/search_icon.png';
+import userPhotoImg from '../../../images/user_profile(48px).png';
+import { useNavigate } from 'react-router-dom';
 
 const Nav = () => {
+  const navigate = useNavigate();
   return (
     <NavBox>
       <SearchBox>
@@ -13,7 +15,11 @@ const Nav = () => {
       <NewArticle>
         <NewArticleBtn>새 글 쓰기</NewArticleBtn>
       </NewArticle>
-      <UserProfile>
+      <UserProfile
+        onClick={() => {
+          navigate('/user');
+        }}
+      >
         <UserPhoto />
       </UserProfile>
     </NavBox>
@@ -95,6 +101,11 @@ const UserProfile = styled.div`
   width: 2.5rem;
   height: 100%;
   margin-right: 2.5rem;
+  cursor: pointer;
+  transition: 0.1s;
+  &:hover {
+    opacity: 0.6;
+  }
   @media (max-width: 612px) {
     display: none;
   }

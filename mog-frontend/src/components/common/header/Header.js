@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import hideMenuIcon from "../../../images/hideMenu_icon.png";
-import logoImg from "../../../images/MogLogo1.png";
-import Nav from "./Nav";
-import SideCategory from "./SideCategory";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import hideMenuIcon from '../../../images/hideMenu_icon.png';
+import logoImg from '../../../images/MogLogo1.png';
+import Nav from './Nav';
+import SideCategory from './SideCategory';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(true);
 
   return (
@@ -18,11 +20,15 @@ const Header = () => {
               setMenuOpen(!menuOpen);
             }}
           />
-          <Logo />
+          <Logo
+            onClick={() => {
+              navigate('/main');
+            }}
+          />
         </TopLeftMenu>
         <Nav />
       </HeaderBox>
-      <div style={{ display: menuOpen ? "block" : "none" }}>
+      <div style={{ display: menuOpen ? 'block' : 'none' }}>
         <SideCategory />
       </div>
     </>
@@ -70,6 +76,11 @@ const Logo = styled.div`
   background: url(${logoImg}) no-repeat center center;
   background-size: cover;
   margin-left: 1.5rem;
+  cursor: pointer;
+  transition: 0.1s;
+  &:hover {
+    opacity: 0.6;
+  }
 
   @media (max-width: 612px) {
     display: none;

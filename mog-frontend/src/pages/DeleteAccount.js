@@ -7,19 +7,20 @@ import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
 import { FlexBox } from '../components/common/formStyle/FlexBox';
 import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { FormWrap } from '../components/common/formStyle/FormWrap';
-import { change_password } from '../components/store/member';
+import { delete_account } from '../components/store/member';
 
-const ChangePassword = () => {
+const DeleteAccount = () => {
   const { email, nickname, message, accessToken, isLogin } = useSelector(
     (state) => state.member,
   );
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // MemberRequestDto
   const [memberInfo, setMemberInfo] = useState({
     email: email,
-    exPassword: '',
-    newPassword: '',
+    password: '',
   });
 
   const onChangeHandler = (e) => {
@@ -29,26 +30,30 @@ const ChangePassword = () => {
     });
   };
 
-  const onSubmitHandler = async (e) => {
+  const DeleteAccountHandler = async (e) => {
     e.preventDefault();
-
-    if (memberInfo.newPassword.trim() === '') {
+    console.log(memberInfo);
+    if (!memberInfo.password.trim()) {
       alert('비밀번호를 확인해주세요!');
     } else {
       await axios
-        .put('/member/password', memberInfo)
+        .post('/member/delete', memberInfo)
         .then((res) => {
-          console.log('비밀번호 변경');
-          console.log(res.data);
-
-          alert(`비밀번호 변경 완료!`);
-          alert(`변경된 정보로 다시 로그인해주세요!`);
-          dispatch(change_password());
-          navigate('/');
+          console.log(res);
+          return res.data;
+        })
+        .then((res) => {
+          console.log(res);
+          if (res === 'ok') {
+            // localStorage.clear();
+            alert('회원탈퇴 완료');
+            dispatch(delete_account());
+            navigate('/');
+          }
         })
         .catch((err) => {
-          alert('비밀번호를 확인해주세요!');
           console.log(err);
+          alert('비밀번호를 확인해주세요');
         });
     }
   };
@@ -56,29 +61,20 @@ const ChangePassword = () => {
   return (
     <FormWrap>
       <FormLogo />
-      <Form onSubmit={onSubmitHandler}>
+      <Form onSubmit={DeleteAccountHandler}>
         <Form.Group className="mb-3">
-          <Form.Label>Your Password</Form.Label>
+          <Form.Label>Delete Your Account</Form.Label>
           <Form.Control
-            name="exPassword"
+            name="password"
             type="password"
-            placeholder="Ex Password"
+            placeholder="Enter your password"
             onChange={onChangeHandler}
           />
         </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-            name="newPassword"
-            type="password"
-            placeholder="New Password"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
         <div style={FlexBox}>
           <Button style={ButtonStyle} variant="primary" type="submit">
-            Update
+            Delete
           </Button>
           <Button
             style={ButtonStyle}
@@ -88,7 +84,7 @@ const ChangePassword = () => {
               navigate('/user');
             }}
           >
-            Main Page
+            My Page
           </Button>
         </div>
       </Form>
@@ -96,4 +92,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default DeleteAccount;

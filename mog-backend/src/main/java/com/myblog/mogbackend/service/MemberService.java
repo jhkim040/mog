@@ -60,14 +60,23 @@ public class MemberService {
         return MemberResponseDto.of(memberRepository.save(member));
     }
 
+    // 암호 일치해야 회원탈퇴
     @Transactional
-    public String deleteByEmail(String email) {
+    public String deleteByEmailandPw(String email, String password) {
+        if(password.trim() == "") {
+            throw new RuntimeException("new password blank");
+        }
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("no such member"));
 
+        if (!passwordEncoder.matches(password, member.getPassword())) {
+            throw new RuntimeException("Incorrect Password");
+        }
         if(!memberRepository.existsByEmail(email)) {
 //            throw new RuntimeException("존재하지 않은 사용자입니다.");
             return "fail";
         } else {
-            Member member = memberRepository.findByEmail(email).get();
+//            Member member = memberRepository.findByEmail(email).get();
             memberRepository.delete(member);
             return "ok";
         }

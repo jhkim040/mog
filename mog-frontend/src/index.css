@@ -3,6 +3,10 @@
   font-family: "Cafe24Ssurround";
 }
 
+input[type="password"] {
+  font-family: "BAUHS93R";
+}
+
 @font-face {
   font-family: "BAUHS93";
   src: url("./fonts/BAUHS93.ttf");

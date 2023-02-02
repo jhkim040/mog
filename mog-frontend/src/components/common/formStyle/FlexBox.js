@@ -1,5 +1,5 @@
 export const FlexBox = {
-  display: "flex",
-  justifyContent: "center",
-  "flex-wrap": "wrap",
+  display: 'flex',
+  justifyContent: 'center',
+  flexWrap: 'wrap',
 };

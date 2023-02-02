@@ -1,27 +1,27 @@
-import axios from "axios";
-import React, { useContext, useEffect } from "react";
-import { Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { ButtonStyle } from "../components/common/formStyle/ButtonStyle";
-import { FlexBox } from "../components/common/formStyle/FlexBox";
-import { FormLogo } from "../components/common/formStyle/FormLogo";
-import { FormWrap } from "../components/common/formStyle/FormWrap";
-import { delete_account, login, logout } from "../components/store/member";
+import axios from 'axios';
+import React, { useContext, useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
+import { FlexBox } from '../components/common/formStyle/FlexBox';
+import { FormLogo } from '../components/common/formStyle/FormLogo';
+import { FormWrap } from '../components/common/formStyle/FormWrap';
+import { delete_account, login, logout } from '../components/store/member';
 
 const MainTest = () => {
   const { email, nickname, message, accessToken, isLogin } = useSelector(
-    (state) => state.member
+    (state) => state.member,
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
-      .get("/member/me", {
+      .get('/member/me', {
         headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ` + localStorage.getItem("accessToken"),
+          'content-type': 'application/json',
+          Authorization: `Bearer ` + localStorage.getItem('accessToken'),
         },
       })
       .then((res) => res.data)
@@ -33,30 +33,30 @@ const MainTest = () => {
 
   const onLogoutHandler = () => {
     // localStorage.clear();
-    alert("로그아웃 완료");
+    alert('로그아웃 완료');
     dispatch(logout());
-    navigate("/");
+    navigate('/');
   };
 
   const DeleteAccountHandler = async () => {
     await axios
-      .delete("/member/delete/" + email)
+      .delete('/member/delete/' + email)
       .then((res) => {
         console.log(res);
         return res.data;
       })
       .then((res) => {
         console.log(res);
-        if (res === "ok") {
+        if (res === 'ok') {
           // localStorage.clear();
-          alert("회원탈퇴 완료");
+          alert('회원탈퇴 완료');
           dispatch(delete_account());
-          navigate("/");
+          navigate('/');
         }
       })
       .catch((err) => {
         console.log(err);
-        alert("회원탈퇴 실패");
+        alert('회원탈퇴 실패');
       });
   };
 
@@ -64,7 +64,7 @@ const MainTest = () => {
     <FormWrap>
       <FormLogo />
       <h2>
-        {nickname} {message && " : " + message}
+        {nickname} {message && ' : ' + message}
       </h2>
       <div style={FlexBox}>
         <Button
@@ -88,7 +88,7 @@ const MainTest = () => {
           type="button"
           style={ButtonStyle}
           onClick={() => {
-            navigate("/nickname");
+            navigate('/nickname');
           }}
         >
           Nickname
@@ -98,7 +98,7 @@ const MainTest = () => {
           type="button"
           style={ButtonStyle}
           onClick={() => {
-            navigate("/password");
+            navigate('/password');
           }}
         >
           Password
@@ -108,7 +108,7 @@ const MainTest = () => {
           type="button"
           style={ButtonStyle}
           onClick={() => {
-            navigate("/message");
+            navigate('/message');
           }}
         >
           Message

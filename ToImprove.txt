@@ -1,0 +1,10 @@
+Member
+- image file
+- DeleteMapping --> RequestBody XX
+
+
+Category
+- FK(member) 
+
+Post
+- FK(member, category)
