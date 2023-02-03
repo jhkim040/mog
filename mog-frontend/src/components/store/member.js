@@ -1,9 +1,9 @@
-export const LOGIN = "LOGIN";
-export const LOGOUT = "LOGOUT";
-export const DELETE_ACCOUNT = "DELETE_ACCOUNT";
-export const CHANGE_NICKNAME = "CHANGE_NICKNAME";
-export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
-export const CHANGE_MESSAGE = "CHANGE_MESSAGE";
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
+export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
+export const CHANGE_NICKNAME = 'CHANGE_NICKNAME';
+export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
+export const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
 
 // action
 export const login = (member) => ({
@@ -35,10 +35,11 @@ export const change_message = (member) => ({
 
 // state
 const initState = {
-  email: "",
-  nickname: "",
-  message: "",
-  accessToken: "",
+  id: 0,
+  email: '',
+  nickname: '',
+  message: '',
+  accessToken: '',
   isLogin: false,
 };
 
@@ -47,10 +48,11 @@ const member = (state = initState, action) => {
     case LOGIN:
       return {
         ...state,
+        id: action.payload.id,
         email: action.payload.email,
         nickname: action.payload.nickname,
         message: action.payload.message,
-        accessToken: localStorage.getItem("accessToken"),
+        accessToken: localStorage.getItem('accessToken'),
       };
     case LOGOUT:
       localStorage.clear();

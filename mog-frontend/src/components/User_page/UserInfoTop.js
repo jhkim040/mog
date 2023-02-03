@@ -21,7 +21,14 @@ const UserInfoTop = () => {
           <UserProfileImg />
           {/* <UserImgChange>이미지 변경</UserImgChange>
           <UserImgDelete>이미지 삭제</UserImgDelete> */}
-          <Logout onClick={onLogoutHandler}>로그아웃</Logout>
+          <Menu
+            onClick={() => {
+              navigate('/main');
+            }}
+          >
+            나의 게시글
+          </Menu>
+          <Menu onClick={onLogoutHandler}>로그아웃</Menu>
         </form>
       </UserImg>
     </Wrap>
@@ -55,7 +62,7 @@ const UserProfileImg = styled.div`
   background: url(${UserImage}) no-repeat center;
 `;
 
-const UserImgChange = styled.button`
+const Menu = styled.button`
   width: 90%;
   height: 1.8rem;
   margin: 0.625rem auto;
@@ -72,6 +79,3 @@ const UserImgChange = styled.button`
     transition: 0.2s;
   }
 `;
-
-const UserImgDelete = UserImgChange;
-const Logout = UserImgChange;

@@ -1,20 +1,20 @@
-import { Button, Form } from "react-bootstrap";
-import React from "react";
-import { ButtonStyle } from "../components/common/formStyle/ButtonStyle";
-import { FormWrap } from "../components/common/formStyle/FormWrap";
-import { FlexBox } from "../components/common/formStyle/FlexBox";
-import { FormLogo } from "../components/common/formStyle/FormLogo";
+import { Button, Form } from 'react-bootstrap';
+import React from 'react';
+import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
+import { FormWrap } from '../components/common/formStyle/FormWrap';
+import { FlexBox } from '../components/common/formStyle/FlexBox';
+import { FormLogo } from '../components/common/formStyle/FormLogo';
 
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
 
   const [loginInfo, setLoginInfo] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
   const onChangeHandler = (e) => {
     setLoginInfo({
@@ -27,18 +27,18 @@ const Login = () => {
     e.preventDefault();
 
     await axios
-      .post("/auth/login", loginInfo)
+      .post('/auth/login', loginInfo)
       .then((res) => {
         // console.log('로그인 시작');
         // console.log(res.data);
 
         alert(`로그인 완료!`);
 
-        localStorage.setItem("accessToken", res.data.accessToken);
-        navigate("/user");
+        localStorage.setItem('accessToken', res.data.accessToken);
+        navigate('/user');
       })
       .catch((err) => {
-        alert("아이디 혹은 비밀번호를 확인해주세요!");
+        alert('아이디 혹은 비밀번호를 확인해주세요!');
         console.log(err);
       });
   };
@@ -77,7 +77,7 @@ const Login = () => {
             variant="secondary"
             type="button"
             onClick={() => {
-              navigate("/signup");
+              navigate('/signup');
             }}
           >
             Signup

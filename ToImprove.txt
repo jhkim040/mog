@@ -1,10 +1,13 @@
 Member
 - image file
 - DeleteMapping --> RequestBody XX
+- find password
 
 
 Category
 - FK(member) 
+- update category
+- delete category
 
 Post
 - FK(member, category)

@@ -1,24 +1,24 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { ButtonStyle } from "../components/common/formStyle/ButtonStyle";
-import { FlexBox } from "../components/common/formStyle/FlexBox";
-import { FormLogo } from "../components/common/formStyle/FormLogo";
-import { FormWrap } from "../components/common/formStyle/FormWrap";
-import { change_message } from "../components/store/member";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
+import { FlexBox } from '../components/common/formStyle/FlexBox';
+import { FormLogo } from '../components/common/formStyle/FormLogo';
+import { FormWrap } from '../components/common/formStyle/FormWrap';
+import { change_message } from '../components/store/member';
 
 const ChangeMessage = () => {
-  const { email, nickname, message, accessToken, isLogin } = useSelector(
-    (state) => state.member
+  const { id, email, nickname, message, accessToken, isLogin } = useSelector(
+    (state) => state.member,
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [memberInfo, setMemberInfo] = useState({
     email: email,
-    message: "",
+    message: '',
   });
 
   const onChangeHandler = (e) => {
@@ -30,21 +30,21 @@ const ChangeMessage = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    if (memberInfo.message === "") {
-      alert("상태 메시지를 확인해주세요");
+    if (memberInfo.message === '') {
+      alert('상태 메시지를 확인해주세요');
     } else {
       await axios
-        .put("/member/message", memberInfo)
+        .put('/member/message', memberInfo)
         .then((res) => {
-          console.log("닉네임 변경");
+          console.log('닉네임 변경');
           console.log(res.data);
 
           alert(`상태메시지 변경 완료!`);
           dispatch(change_message(memberInfo));
-          navigate("/user");
+          navigate('/user');
         })
         .catch((err) => {
-          alert("닉네임 변경 에러");
+          alert('닉네임 변경 에러');
           console.log(err);
         });
     }
@@ -73,7 +73,7 @@ const ChangeMessage = () => {
             variant="secondary"
             type="button"
             onClick={() => {
-              navigate("/user");
+              navigate('/user');
             }}
           >
             Main Page

@@ -1,24 +1,24 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { ButtonStyle } from "../components/common/formStyle/ButtonStyle";
-import { FlexBox } from "../components/common/formStyle/FlexBox";
-import { FormLogo } from "../components/common/formStyle/FormLogo";
-import { FormWrap } from "../components/common/formStyle/FormWrap";
-import { change_nickname } from "../components/store/member";
+import axios from 'axios';
+import React, { useState } from 'react';
+import { Button, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
+import { FlexBox } from '../components/common/formStyle/FlexBox';
+import { FormLogo } from '../components/common/formStyle/FormLogo';
+import { FormWrap } from '../components/common/formStyle/FormWrap';
+import { change_nickname } from '../components/store/member';
 
 const ChangeNickname = () => {
-  const { email, nickname, message, accessToken, isLogin } = useSelector(
-    (state) => state.member
+  const { id, email, nickname, message, accessToken, isLogin } = useSelector(
+    (state) => state.member,
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [memberInfo, setMemberInfo] = useState({
     email: email,
-    nickname: "",
+    nickname: '',
   });
 
   const onChangeHandler = (e) => {
@@ -30,21 +30,21 @@ const ChangeNickname = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    if (memberInfo.nickname === "") {
-      alert("닉네임을 확인해주세요");
+    if (memberInfo.nickname === '') {
+      alert('닉네임을 확인해주세요');
     } else {
       await axios
-        .put("/member/nickname", memberInfo)
+        .put('/member/nickname', memberInfo)
         .then((res) => {
-          console.log("닉네임 변경");
+          console.log('닉네임 변경');
           console.log(res.data);
 
           alert(`닉네임 변경 완료!`);
           dispatch(change_nickname(memberInfo));
-          navigate("/user");
+          navigate('/user');
         })
         .catch((err) => {
-          alert("닉네임 변경 에러");
+          alert('닉네임 변경 에러');
           console.log(err);
         });
     }
@@ -73,7 +73,7 @@ const ChangeNickname = () => {
             variant="secondary"
             type="button"
             onClick={() => {
-              navigate("/user");
+              navigate('/user');
             }}
           >
             Main Page

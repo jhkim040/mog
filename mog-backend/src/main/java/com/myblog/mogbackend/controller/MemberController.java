@@ -62,7 +62,8 @@ public class MemberController {
     }
 
 
-    @PostMapping("/delete")
+    // 회원탈퇴 이메일, 암호 필요
+    @PostMapping("/account")
     public ResponseEntity<?> deleteByEmailandPw(@RequestBody MemberRequestDto request) {
         return new ResponseEntity<>(memberService.deleteByEmailandPw(request.getEmail(), request.getPassword()), HttpStatus.OK);
     }

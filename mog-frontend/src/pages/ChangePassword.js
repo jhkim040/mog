@@ -10,7 +10,7 @@ import { FormWrap } from '../components/common/formStyle/FormWrap';
 import { change_password } from '../components/store/member';
 
 const ChangePassword = () => {
-  const { email, nickname, message, accessToken, isLogin } = useSelector(
+  const { id, email, nickname, message, accessToken, isLogin } = useSelector(
     (state) => state.member,
   );
   const dispatch = useDispatch();

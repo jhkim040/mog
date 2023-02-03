@@ -15,6 +15,12 @@ public class MemberService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
+    public Member findById(Long id) {
+        return memberRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("no such member"));
+    }
+
+    @Transactional(readOnly = true)
     public MemberResponseDto findByEmail(String email) {
         return memberRepository.findByEmail(email)
                 .map(MemberResponseDto::of)

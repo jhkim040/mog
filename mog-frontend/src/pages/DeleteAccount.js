@@ -10,14 +10,13 @@ import { FormWrap } from '../components/common/formStyle/FormWrap';
 import { delete_account } from '../components/store/member';
 
 const DeleteAccount = () => {
-  const { email, nickname, message, accessToken, isLogin } = useSelector(
+  const { id, email, nickname, message, accessToken, isLogin } = useSelector(
     (state) => state.member,
   );
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // MemberRequestDto
   const [memberInfo, setMemberInfo] = useState({
     email: email,
     password: '',
@@ -37,7 +36,7 @@ const DeleteAccount = () => {
       alert('비밀번호를 확인해주세요!');
     } else {
       await axios
-        .post('/member/delete', memberInfo)
+        .post('/member/account', memberInfo)
         .then((res) => {
           console.log(res);
           return res.data;

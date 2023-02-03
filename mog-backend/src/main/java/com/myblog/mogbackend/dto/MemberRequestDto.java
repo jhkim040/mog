@@ -15,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @NoArgsConstructor
 @Builder
 public class MemberRequestDto {
+    private Long id;
     private String email;
     private String password;
     private String nickname;
@@ -22,6 +23,7 @@ public class MemberRequestDto {
 
     public Member toMember(PasswordEncoder passwordEncoder) {
         return Member.builder()
+                .id(id)
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .nickname(nickname)
