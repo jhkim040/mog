@@ -53,7 +53,9 @@ const member = (state = initState, action) => {
         nickname: action.payload.nickname,
         message: action.payload.message,
         accessToken: localStorage.getItem('accessToken'),
+        isLogin: true,
       };
+
     case LOGOUT:
       localStorage.clear();
       return initState;
@@ -77,8 +79,9 @@ const member = (state = initState, action) => {
         ...state,
         message: action.payload.message,
       };
+
     default:
-      return initState;
+      return state;
   }
 };
 export default member;

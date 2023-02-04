@@ -1,34 +1,11 @@
-import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { list_category } from '../../store/category';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useSelector } from 'react-redux';
+
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ArticleBox = () => {
-  const dispatch = useDispatch();
-
-  const { id, email, nickname, message, accessToken, isLogin } = useSelector(
-    (state) => state.member,
-  );
   const { categoryList } = useSelector((state) => state.category);
-
-  useEffect(() => {
-    const getCategoryList = async () => {
-      axios
-        .post('/category/list', {
-          member_id: id,
-        })
-        .then((res) => res.data)
-        .then((res) => {
-          if (res.length > 0) {
-            dispatch(list_category(res));
-          }
-        })
-        .catch((err) => console.log(err));
-    };
-    getCategoryList();
-  }, []);
 
   return (
     <>
@@ -65,6 +42,9 @@ const CategoryTitle = styled.h2`
     text-decoration: none;
     color: #000;
   }
+  & :hover {
+    opacity: 0.6;
+  }
 `;
 
 const SingleArticle = styled.li`
@@ -76,5 +56,8 @@ const SingleArticle = styled.li`
   & > a {
     text-decoration: none;
     color: #000;
+  }
+  & :hover {
+    opacity: 0.6;
   }
 `;

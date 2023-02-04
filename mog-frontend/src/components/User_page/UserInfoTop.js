@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserImage from '../../images/user_profile(128px).png';
+import { logout_category } from '../store/category';
 import { logout } from '../store/member';
 
 const UserInfoTop = () => {
@@ -12,6 +13,7 @@ const UserInfoTop = () => {
     // localStorage.clear();
     alert('로그아웃 완료');
     dispatch(logout());
+    dispatch(logout_category()); // 카테고리 정보 초기화
     navigate('/');
   };
   return (

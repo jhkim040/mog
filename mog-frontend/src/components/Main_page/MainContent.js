@@ -4,15 +4,19 @@ import styled from 'styled-components';
 import userPhotoImg from '../../images/user_profile(128px).png';
 
 const MainContent = () => {
-  const { id, email, nickname, message, accessToken, isLogin } = useSelector(
-    (state) => state.member,
-  );
+  const id = useSelector((state) => state.member.id);
+  const nickname = useSelector((state) => state.member.nickname);
+  const message = useSelector((state) => state.member.message);
+
+  console.log('MainContent-----------');
+  console.log(id);
+  console.log(nickname);
   return (
     <Wrap>
       <MainUserProfile>
         <UserPhoto />
         <div>
-          <UserName>{nickname}</UserName>
+          {nickname && <UserName>{nickname}</UserName>}
           {message && <UserMsg>{message}</UserMsg>}
         </div>
       </MainUserProfile>

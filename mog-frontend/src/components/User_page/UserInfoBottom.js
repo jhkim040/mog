@@ -5,9 +5,10 @@ import styled from 'styled-components';
 
 const UserInfoBottom = () => {
   const navigate = useNavigate();
-  const { email, nickname, message, accessToken, isLogin } = useSelector(
+  const { id, email, nickname, message, accessToken, isLogin } = useSelector(
     (state) => state.member,
   );
+
   return (
     <Wrap>
       <SingleInfo>

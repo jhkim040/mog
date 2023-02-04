@@ -7,6 +7,7 @@ import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
 import { FlexBox } from '../components/common/formStyle/FlexBox';
 import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { FormWrap } from '../components/common/formStyle/FormWrap';
+import { delete_account_category } from '../components/store/category';
 import { delete_account } from '../components/store/member';
 
 const DeleteAccount = () => {
@@ -47,6 +48,7 @@ const DeleteAccount = () => {
             // localStorage.clear();
             alert('회원탈퇴 완료');
             dispatch(delete_account());
+            dispatch(delete_account_category()); // 카테고리 정보 초기화
             navigate('/');
           }
         })

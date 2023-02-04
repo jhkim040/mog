@@ -1,17 +1,22 @@
 package com.myblog.mogbackend.service;
 
 import com.myblog.mogbackend.dto.MemberResponseDto;
+import com.myblog.mogbackend.entity.Category;
 import com.myblog.mogbackend.entity.Member;
+import com.myblog.mogbackend.repository.CategoryRepository;
 import com.myblog.mogbackend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
+    private final CategoryRepository categoryRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
@@ -83,6 +88,13 @@ public class MemberService {
             return "fail";
         } else {
 //            Member member = memberRepository.findByEmail(email).get();
+            // 탈퇴한 회원이 지금까지 쓴 카테고리 모두 삭제
+            List<Category> list = categoryRepository.findCategoryByMember(member);
+            if(list != null || list.size() > 0) {
+                for(Category c : list) {
+                    categoryRepository.delete(c);
+                }
+            }
             memberRepository.delete(member);
             return "ok";
         }

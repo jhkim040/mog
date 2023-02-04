@@ -5,6 +5,7 @@ import com.myblog.mogbackend.entity.Category;
 import com.myblog.mogbackend.service.CategoryService;
 import com.myblog.mogbackend.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,22 +18,22 @@ public class CategoryController {
     private final CategoryService categoryService;
     private final MemberService memberService;
 
-   @PostMapping("/list")
-    public List<Category> categoryList(@RequestBody CategoryDto request) {
-        return categoryService.categoryList(request.getMember_id());
+   @GetMapping("/list/{id}") // id: memberId
+    public ResponseEntity<List<CategoryDto>> categoryList(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(categoryService.categoryList(id));
     }
     @PostMapping("/write")
-    public Category writeCategory(@RequestBody CategoryDto request) {
+    public ResponseEntity<CategoryDto> writeCategory(@RequestBody CategoryDto request) {
         System.out.println(request.getName());
-        System.out.println(request.getMember_id());
+        System.out.println(request.getMemberId());
         Category category = new Category();
         category.setName(request.getName());
-        category.setMember(memberService.findById(request.getMember_id()));
-        return categoryService.write(category);
+        category.setMember(memberService.findById(request.getMemberId()));
+        return ResponseEntity.ok(categoryService.write(category));
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteCategory(@PathVariable Long id) {
+    public void deleteCategory(@PathVariable("id") Long id) {
         categoryService.delete(id);
     }
 
