@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -30,34 +30,37 @@ const DeleteAccount = () => {
     });
   };
 
-  const DeleteAccountHandler = async (e) => {
-    e.preventDefault();
-    console.log(memberInfo);
-    if (!memberInfo.password.trim()) {
-      alert('비밀번호를 확인해주세요!');
-    } else {
-      await axios
-        .post('/member/account', memberInfo)
-        .then((res) => {
-          console.log(res);
-          return res.data;
-        })
-        .then((res) => {
-          console.log(res);
-          if (res === 'ok') {
-            // localStorage.clear();
-            alert('회원탈퇴 완료');
-            dispatch(delete_account());
-            dispatch(delete_account_category()); // 카테고리 정보 초기화
-            navigate('/');
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-          alert('비밀번호를 확인해주세요');
-        });
-    }
-  };
+  const DeleteAccountHandler = useCallback(
+    async (e) => {
+      e.preventDefault();
+      // console.log(memberInfo);
+      if (!memberInfo.password.trim()) {
+        alert('비밀번호를 확인해주세요!');
+      } else {
+        await axios
+          .post('/member/account', memberInfo)
+          .then((res) => {
+            console.log(res);
+            return res.data;
+          })
+          .then((res) => {
+            console.log(res);
+            if (res === 'ok') {
+              // localStorage.clear();
+              alert('회원탈퇴 완료');
+              dispatch(delete_account());
+              dispatch(delete_account_category()); // 카테고리 정보 초기화
+              navigate('/');
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            alert('비밀번호를 확인해주세요');
+          });
+      }
+    },
+    [memberInfo],
+  );
 
   return (
     <FormWrap>

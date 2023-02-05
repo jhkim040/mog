@@ -89,7 +89,7 @@ public class MemberService {
         } else {
 //            Member member = memberRepository.findByEmail(email).get();
             // 탈퇴한 회원이 지금까지 쓴 카테고리 모두 삭제
-            List<Category> list = categoryRepository.findCategoryByMember(member);
+            List<Category> list = categoryRepository.findByMember_Id(member.getId());
             if(list != null || list.size() > 0) {
                 for(Category c : list) {
                     categoryRepository.delete(c);

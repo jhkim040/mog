@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,6 +32,16 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
+    @OneToMany(mappedBy = "member")
+    private List<Category> categories;
+
+    public void addCategory(Category category) {
+        this.categories.add(category);
+        if(category.getMember() != this) {
+            category.setMember(this);
+        }
+    }
+
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
@@ -41,13 +53,14 @@ public class Member {
     }
 
     @Builder
-    public Member(Long id, String email, String password, String nickname, String message, Authority authority){
+    public Member(Long id, String email, String password, String nickname, String message, Authority authority, List<Category> categories){
         this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.message = message;
         this.authority = authority;
+        this.categories = categories;
     }
 
 

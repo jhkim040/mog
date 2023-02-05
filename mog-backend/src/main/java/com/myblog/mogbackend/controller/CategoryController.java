@@ -32,9 +32,18 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.write(category));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteCategory(@PathVariable("id") Long id) {
-        categoryService.delete(id);
+    @DeleteMapping("/delete/{categoryId}")
+    public void deleteCategory(@PathVariable("categoryId") Long categoryId) {
+        System.out.println(categoryId);
+//       try {
+//           Long long_categoryId = Long.parseLong(categoryId);
+//           if(long_categoryId != null) {
+//                categoryService.delete(long_categoryId);
+//           }
+//       } catch (Exception e) {
+//           throw new RuntimeException("categoryId(Long) type error");
+//       }
+        categoryService.delete(categoryId);
     }
 
     @PutMapping("/update")

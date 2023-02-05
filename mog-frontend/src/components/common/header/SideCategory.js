@@ -12,7 +12,14 @@ const SideCategory = () => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.member.id);
 
+  const [category, setCategory] = useState({
+    name: '',
+    memberId: id,
+  });
+
   useEffect(() => {
+    setCategory({ ...category, memberId: id });
+
     const getCategoryList = async () => {
       if (id !== 0) {
         await axios
@@ -27,41 +34,39 @@ const SideCategory = () => {
       }
     };
     getCategoryList();
-  }, []);
-
-  const [category, setCategory] = useState({
-    name: '',
-    memberId: id,
-  });
+  }, [id]);
 
   const onChangeHandler = (e) => {
     setCategory({ ...category, [e.target.name]: e.target.value });
   };
 
-  const onSubmitHandler = async (e) => {
-    // 카테고리 메뉴에서 새로운 카테고리 추가
+  const onSubmitHandler = useCallback(
+    async (e) => {
+      // 카테고리 메뉴에서 새로운 카테고리 추가
 
-    e.preventDefault();
-    // console.log(category);
-    if (!category.name.trim()) {
-      alert('카테고리 명을 확인해주세요');
-    } else if (category.memberId === 0) {
-      alert('죄송합니다. 잠시 후 다시 이용해주세요.');
-    } else {
-      await axios
-        .post('/category/write', category)
-        .then((res) => res.data)
-        .then((res) => {
-          console.log(res);
-          alert('카테고리 추가완료!');
-          dispatch(insert_category(res));
-        })
-        .catch((err) => {
-          alert('카테고리 추가 실패');
-          console.log(err);
-        });
-    }
-  };
+      e.preventDefault();
+      // console.log(category);
+      if (!category.name.trim()) {
+        alert('카테고리 명을 확인해주세요');
+      } else if (category.memberId === 0) {
+        alert('죄송합니다. 잠시 후 다시 이용해주세요.');
+      } else {
+        await axios
+          .post('/category/write', category)
+          .then((res) => res.data)
+          .then((res) => {
+            console.log(res);
+            alert('카테고리 추가완료!');
+            dispatch(insert_category(res));
+          })
+          .catch((err) => {
+            alert('카테고리 추가 실패');
+            console.log(err);
+          });
+      }
+    },
+    [category],
+  );
 
   // 카테고리 추가 버튼 클릭
   const onAddCategory = useCallback(() => {

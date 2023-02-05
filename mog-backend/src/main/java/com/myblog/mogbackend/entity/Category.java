@@ -15,16 +15,23 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "memberId", referencedColumnName = "id")
     private Member member; // author (member FK)
+
+    public void setMember(Member member) {
+        if(this.member != null) {
+            this.member.getCategories().remove(this);
+        }
+        this.member = member;
+        member.getCategories().add(this);
+    }
 
 //    public void setId(Long id) {this.id = id;}
     public void setName(String name) {
         this.name = name;
     }
-    public void setMember(Member member) {this.member = member;}
 }

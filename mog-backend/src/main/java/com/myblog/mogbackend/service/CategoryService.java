@@ -25,11 +25,10 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public List<CategoryDto> categoryList(Long memberId) {
-        System.out.println(memberId);
-        Member member = memberRepository.findById(memberId)
-        .orElseThrow(()->new RuntimeException("no such member"));
 
-        List<Category> list = categoryRepository.findCategoryByMember(member);
+//        Member member = memberRepository.findById(memberId)
+//        .orElseThrow(()->new RuntimeException("no such member"));
+        List<Category> list = categoryRepository.findByMember_Id(memberId);
         return CategoryDto.toCategoryDtoList(list);
 
     }
