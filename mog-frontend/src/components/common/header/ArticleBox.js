@@ -45,7 +45,7 @@ const ArticleBox = () => {
           <div key={category.id}>
             <CategoryTitle>
               <Link to={''}>
-                {category.id}
+                {/* {category.id} */}
                 {category.name}
               </Link>
               <DeleteIcon
