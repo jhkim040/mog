@@ -1,6 +1,7 @@
 package com.myblog.mogbackend.dto;
 
 import com.myblog.mogbackend.entity.Category;
+import com.myblog.mogbackend.entity.Post;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,12 +20,14 @@ public class CategoryDto {
     private Long id;
     private String name;
     private Long memberId;
+//    private List<Post> posts;
 
     public static CategoryDto toCategoryDto(Category category) {
         return CategoryDto.builder()
                 .id(category.getId())
                 .name(category.getName())
                 .memberId(category.getMember().getId())
+//                .posts(category.getPosts())
                 .build();
     }
 

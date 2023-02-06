@@ -25,13 +25,36 @@ public class Post {
 
 
     @ManyToOne
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "memberId", referencedColumnName = "id")
     private Member member; // author (member FK)
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category; // category (category FK)
 
     @CreationTimestamp
     private Timestamp createDate;
+
+    public void setMember(Member member) {
+        if(this.member != null) {
+            this.member.getPosts().remove(this);
+        }
+        this.member = member;
+        member.getPosts().add(this);
+    }
+
+    public void setCategory(Category category) {
+        if(this.category != null) {
+            this.category.getPosts().remove(this);
+        }
+        this.category = category;
+        category.getPosts().add(this);
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
 }

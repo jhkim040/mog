@@ -1,5 +1,6 @@
 package com.myblog.mogbackend.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Member {
     @Id
@@ -35,10 +37,20 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<Category> categories;
 
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts;
+
     public void addCategory(Category category) {
         this.categories.add(category);
         if(category.getMember() != this) {
             category.setMember(this);
+        }
+    }
+
+    public void addPost(Post post) {
+        this.posts.add(post);
+        if(post.getMember() != this) {
+            post.setMember(this);
         }
     }
 
@@ -53,14 +65,14 @@ public class Member {
     }
 
     @Builder
-    public Member(Long id, String email, String password, String nickname, String message, Authority authority, List<Category> categories){
+    public Member(Long id, String email, String password, String nickname, String message, Authority authority){
         this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.message = message;
         this.authority = authority;
-        this.categories = categories;
+//        this.categories = categories;
     }
 
 

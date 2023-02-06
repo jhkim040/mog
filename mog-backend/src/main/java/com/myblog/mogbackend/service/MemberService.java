@@ -3,8 +3,10 @@ package com.myblog.mogbackend.service;
 import com.myblog.mogbackend.dto.MemberResponseDto;
 import com.myblog.mogbackend.entity.Category;
 import com.myblog.mogbackend.entity.Member;
+import com.myblog.mogbackend.entity.Post;
 import com.myblog.mogbackend.repository.CategoryRepository;
 import com.myblog.mogbackend.repository.MemberRepository;
+import com.myblog.mogbackend.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final CategoryRepository categoryRepository;
     private final PasswordEncoder passwordEncoder;
+    private final PostRepository postRepository;
 
     @Transactional(readOnly = true)
     public Member findById(Long id) {
@@ -89,12 +92,20 @@ public class MemberService {
         } else {
 //            Member member = memberRepository.findByEmail(email).get();
             // 탈퇴한 회원이 지금까지 쓴 카테고리 모두 삭제
-            List<Category> list = categoryRepository.findByMember_Id(member.getId());
-            if(list != null || list.size() > 0) {
-                for(Category c : list) {
+            List<Category> categoryList = categoryRepository.findByMember_Id(member.getId());
+            if(categoryList != null || categoryList.size() > 0) {
+                for(Category c : categoryList) {
                     categoryRepository.delete(c);
                 }
             }
+            // 탈퇴한 회원이 지금까지 쓴 게시글 모두 삭제
+            List<Post> postList = postRepository.findByMember_Id(member.getId());
+            if(postList != null || postList.size() > 0) {
+                for(Post p : postList) {
+                    postRepository.delete(p);
+                }
+            }
+            // 회원정보 삭제
             memberRepository.delete(member);
             return "ok";
         }

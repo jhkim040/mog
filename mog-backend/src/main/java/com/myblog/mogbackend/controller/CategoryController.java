@@ -5,6 +5,7 @@ import com.myblog.mogbackend.entity.Category;
 import com.myblog.mogbackend.service.CategoryService;
 import com.myblog.mogbackend.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,8 +34,8 @@ public class CategoryController {
     }
 
     @DeleteMapping("/delete/{categoryId}")
-    public void deleteCategory(@PathVariable("categoryId") Long categoryId) {
-        System.out.println(categoryId);
+    public ResponseEntity<?> deleteCategory(@PathVariable("categoryId") Long categoryId) {
+
 //       try {
 //           Long long_categoryId = Long.parseLong(categoryId);
 //           if(long_categoryId != null) {
@@ -43,13 +44,15 @@ public class CategoryController {
 //       } catch (Exception e) {
 //           throw new RuntimeException("categoryId(Long) type error");
 //       }
-        categoryService.delete(categoryId);
+
+        return new ResponseEntity<>(categoryService.delete(categoryId), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public void updateCategory(@RequestBody Category category) {
+    public ResponseEntity<?> updateCategory(@RequestBody Category category) {
         Category categoryTemp = categoryService.findCategoryById(category.getId());
         categoryTemp.setName(category.getName());
-        categoryService.write(categoryTemp);
+//        categoryService.write(categoryTemp);
+        return new ResponseEntity<>(categoryService.write(categoryTemp), HttpStatus.OK);
     }
 }
