@@ -79,22 +79,25 @@ const SideCategory = () => {
         SIDECATEGORY_CONTAINER.current.scrollHeight;
     }, 500);
     // console.log(categoryState);
-  }, []);
+  }, [category]);
 
   // 카테고리 추가 엔터키
-  const onEnterAddState = useCallback((e) => {
-    if (e.key === 'Enter') {
-      // 입력 form 공백으로 초기화
-      SIDECATEGORY_INPUT.current.value = '';
-      category.name = '';
-      setTimeout(() => {
-        // 추가된 category로 focus
-        SIDECATEGORY_CONTAINER.current.scrollTop =
-          SIDECATEGORY_CONTAINER.current.scrollHeight;
-      }, 500);
-    }
-    // console.log(categoryState);
-  }, []);
+  const onEnterAddState = useCallback(
+    (e) => {
+      if (e.key === 'Enter') {
+        // 입력 form 공백으로 초기화
+        SIDECATEGORY_INPUT.current.value = '';
+        category.name = '';
+        setTimeout(() => {
+          // 추가된 category로 focus
+          SIDECATEGORY_CONTAINER.current.scrollTop =
+            SIDECATEGORY_CONTAINER.current.scrollHeight;
+        }, 500);
+      }
+      // console.log(categoryState);
+    },
+    [category],
+  );
 
   return (
     <Wrap>

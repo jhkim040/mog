@@ -13,7 +13,13 @@ const Nav = () => {
         <SearchBtn type="button" />
       </SearchBox>
       <NewArticle>
-        <NewArticleBtn>새 글 쓰기</NewArticleBtn>
+        <NewArticleBtn
+          onClick={() => {
+            navigate('/post/publish');
+          }}
+        >
+          새 글 쓰기
+        </NewArticleBtn>
       </NewArticle>
       <UserProfile
         onClick={() => {
