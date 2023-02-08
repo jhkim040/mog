@@ -82,7 +82,7 @@ const Logo = styled.div`
     opacity: 0.6;
   }
 
-  @media (max-width: 612px) {
+  /* @media (max-width: 612px) {
     display: none;
-  }
+  } */
 `;

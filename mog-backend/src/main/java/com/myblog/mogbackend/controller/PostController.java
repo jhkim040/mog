@@ -24,28 +24,39 @@ public class PostController {
     private final CategoryService categoryService;
     private final MemberService memberService;
 
+    @GetMapping("/{postId}")
+    public ResponseEntity<PostDto> getPost(@PathVariable("postId") Long id) {
+        return ResponseEntity.ok(PostDto.toPostDto(postService.findPostById(id)));
+    }
+
+    @GetMapping("/search/{memberId}/{keyword}")
+    public ResponseEntity<List<PostDto>> searchPost(@PathVariable("memberId") Long memberId, @PathVariable("keyword") String keyword) {
+        return ResponseEntity.ok(postService.searchPost(memberId, keyword));
+    }
+
     @GetMapping("/list/{id}") // id: memberId
-    public ResponseEntity<List<PostDto>> categoryList(@PathVariable("id") Long id) {
+    public ResponseEntity<List<PostDto>> postList(@PathVariable("id") Long id) {
         return ResponseEntity.ok(postService.postList(id));
     }
     @PostMapping("/write")
-    public ResponseEntity<PostDto> writeCategory(@RequestBody PostDto request) {
-        log.info(request.getId().toString());
+    public ResponseEntity<PostDto> writePost(@RequestBody PostDto request) {
+        log.info(request.getCategoryId().toString());
         log.info(request.getTitle());
         Post post = new Post();
         post.setTitle(request.getTitle());
+        post.setContent(request.getContent());
         post.setMember(memberService.findById(request.getMemberId()));
         post.setCategory(categoryService.findCategoryById(request.getCategoryId()));
         return ResponseEntity.ok(postService.write(post));
     }
 
-    @DeleteMapping("/delete/{categoryId}")
+    @DeleteMapping("/delete/{postId}")
     public ResponseEntity<?> deletePost(@PathVariable("postId") Long postId) {
         return new ResponseEntity<>(postService.delete(postId), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> updateCategory(@RequestBody PostDto postDto) {
+    public ResponseEntity<?> updatePost(@RequestBody PostDto postDto) {
         Post postTemp = postService.findPostById(postDto.getId());
         postTemp.setTitle(postDto.getTitle());
         postTemp.setContent(postDto.getContent());

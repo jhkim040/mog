@@ -22,6 +22,7 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public Category findCategoryById(Long id) {
+        System.out.println(id);
         return categoryRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("no such category"));
     }
@@ -51,13 +52,25 @@ public class CategoryService {
     }
 
     @Transactional
-    public CategoryDto write(Category category) {
+    public CategoryDto writeCategory(Category category) {
 
         return CategoryDto.toCategoryDto(categoryRepository.save(category));
     }
 
     @Transactional
-    public String delete(Long id) {
+    public String deleteCategory(Long id) {
+
+        if(!categoryRepository.existsById(id)) {
+            throw new RuntimeException("no such category");
+        }
+
+        // 탈퇴한 회원이 지금까지 쓴 게시글 모두 삭제
+        List<Post> postList = postRepository.findByCategory_IdOrderByUpdatedAtDesc(id);
+        if(postList != null || postList.size() > 0) {
+            for(Post p : postList) {
+                postRepository.delete(p);
+            }
+        }
         categoryRepository.deleteById(id);
         return "ok";
     }

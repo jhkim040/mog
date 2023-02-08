@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { insert_category, list_category } from '../../store/category';
 import ArticleBox from './ArticleBox';
+// import { list_post } from '../../store/post';
 
 const SideCategory = () => {
   const SIDECATEGORY_CONTAINER = useRef(null);
@@ -17,25 +18,6 @@ const SideCategory = () => {
     memberId: id,
   });
 
-  useEffect(() => {
-    setCategory({ ...category, memberId: id });
-
-    const getCategoryList = async () => {
-      if (id !== 0) {
-        await axios
-          .get(`/category/list/${id}`)
-          .then((res) => res.data)
-          .then((res) => {
-            if (res.length > 0) {
-              dispatch(list_category(res));
-            }
-          })
-          .catch((err) => console.log(err));
-      }
-    };
-    getCategoryList();
-  }, [id]);
-
   const onChangeHandler = (e) => {
     setCategory({ ...category, [e.target.name]: e.target.value });
   };
@@ -45,7 +27,7 @@ const SideCategory = () => {
       // 카테고리 메뉴에서 새로운 카테고리 추가
 
       e.preventDefault();
-      // console.log(category);
+      console.log(category);
       if (!category.name.trim()) {
         alert('카테고리 명을 확인해주세요');
       } else if (category.memberId === 0) {
@@ -79,25 +61,22 @@ const SideCategory = () => {
         SIDECATEGORY_CONTAINER.current.scrollHeight;
     }, 500);
     // console.log(categoryState);
-  }, [category]);
+  }, []);
 
   // 카테고리 추가 엔터키
-  const onEnterAddState = useCallback(
-    (e) => {
-      if (e.key === 'Enter') {
-        // 입력 form 공백으로 초기화
-        SIDECATEGORY_INPUT.current.value = '';
-        category.name = '';
-        setTimeout(() => {
-          // 추가된 category로 focus
-          SIDECATEGORY_CONTAINER.current.scrollTop =
-            SIDECATEGORY_CONTAINER.current.scrollHeight;
-        }, 500);
-      }
-      // console.log(categoryState);
-    },
-    [category],
-  );
+  const onEnterAddState = useCallback((e) => {
+    if (e.key === 'Enter') {
+      // 입력 form 공백으로 초기화
+      SIDECATEGORY_INPUT.current.value = '';
+      category.name = '';
+      setTimeout(() => {
+        // 추가된 category로 focus
+        SIDECATEGORY_CONTAINER.current.scrollTop =
+          SIDECATEGORY_CONTAINER.current.scrollHeight;
+      }, 500);
+    }
+    // console.log(categoryState);
+  }, []);
 
   return (
     <Wrap>

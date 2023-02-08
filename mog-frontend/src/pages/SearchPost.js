@@ -1,24 +1,22 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/common/header/Header';
 import MainContent from '../components/Main_page/MainContent';
 
-const Main = () => {
-  const { keyword } = useParams();
+const SearchPost = () => {
   return (
     <>
       <Header />
       <Container>
         <Content>
-          <MainContent keyword={keyword} />
+          <MainContent />
         </Content>
       </Container>
     </>
   );
 };
 
-export default Main;
+export default SearchPost;
 
 const Container = styled.div`
   padding-top: 9.375rem;

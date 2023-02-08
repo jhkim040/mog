@@ -1,12 +1,15 @@
 package com.myblog.mogbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +26,6 @@ public class Post {
     @Column(nullable = false)
     private String content;
 
-
     @ManyToOne
     @JoinColumn(name = "memberId", referencedColumnName = "id")
     private Member member; // author (member FK)
@@ -32,8 +34,15 @@ public class Post {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category; // category (category FK)
 
-    @CreationTimestamp
-    private Timestamp createDate;
+    @CreationTimestamp // INSERT 시 자동으로 값을 채워줌
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp // UPDATE 시 자동으로 값을 채워줌
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
     public void setMember(Member member) {
         if(this.member != null) {

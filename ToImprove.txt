@@ -12,3 +12,4 @@ Category
 
 Post
 - FK(member, category)
+- order by timestamp

@@ -1,17 +1,91 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexBox } from '../common/formStyle/FlexBox';
+import { insert_post, update_post } from '../store/post';
 import { Button } from './Button';
 
-const PublishMenu = () => {
+const PublishMenu = ({ newPost, setNewPost }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const categoryList = useSelector((state) => state.category.categoryList);
+  const onChangeHandler = (e) => {
+    setNewPost({
+      ...newPost,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const updatePostHandler = async () => {
+    if (!newPost.id) {
+      await axios
+        .post(`/post/write`, newPost)
+        .then((res) => {
+          // console.log(res);
+          if (res.status === 200) {
+            const result = res.data;
+            alert(`게시글 추가 완료`);
+            dispatch(insert_post(result));
+            navigate('/main');
+          }
+        })
+
+        .catch((err) => {
+          alert('죄송합니다. 잠시 후 다시 이용바랍니다.');
+          console.log(err);
+        });
+    } else {
+      await axios
+        .put(`/post/update`, newPost)
+        .then((res) => {
+          // console.log(res);
+          if (res.status === 200) {
+            const result = res.data;
+            alert(`게시글 수정 완료`);
+            dispatch(update_post(result));
+            navigate('/main');
+          }
+        })
+
+        .catch((err) => {
+          alert('죄송합니다. 잠시 후 다시 이용바랍니다.');
+          console.log(err);
+        });
+    }
+  };
+
+  const select_category = (newPost) => {
+    if (newPost.categoryId) {
+      return newPost.categoryId;
+    }
+    if (categoryList && categoryList.length > 0) {
+      const categoryId = categoryList[0].id;
+      setNewPost({
+        ...newPost,
+        categoryId: categoryId,
+      });
+      return categoryId;
+    }
+  };
   return (
     <MenuBox>
       <MenuContainer>
         <MenuTitle>
           <h3>카테고리</h3>
-          <select name="category">
-            <option>category1</option>
-            <option>category2</option>
+          <select
+            name="categoryId"
+            onChange={onChangeHandler}
+            defaultValue={select_category(newPost)}
+          >
+            {categoryList.length > 0 &&
+              categoryList.map((category, idx) => (
+                <option key={idx} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
           </select>
         </MenuTitle>
         {/* <MenuTitle>
@@ -26,7 +100,7 @@ const PublishMenu = () => {
           <textarea name="editTag" cols="40" rows="5" />
         </MenuTitle> */}
         <hr />
-        <div style={FlexBox}>
+        <div style={FlexBox} onClick={updatePostHandler}>
           <Button>SUBMIT</Button>
         </div>
       </MenuContainer>

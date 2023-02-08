@@ -1,11 +1,13 @@
 import React, { useCallback, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logoImg from '../../images/MogLogo1.png';
 import { Button } from './Button';
 import PublishMenu from './PublishMenu';
 
-const PublishHeader = () => {
+const PublishHeader = ({ newPost, setNewPost }) => {
+  // console.log(newPost);
+  // console.log(setNewPost);
   const [isOpen, setIsOpen] = useState(false);
 
   const openMenuHandler = useCallback(() => {
@@ -14,13 +16,17 @@ const PublishHeader = () => {
   }, [isOpen]);
 
   const navigate = useNavigate();
+
   return (
     <Wrap>
       <TopLeftMenu>
-        <Logo />
+        <Logo
+          onClick={() => {
+            navigate('/main');
+          }}
+        />
         <BlogName>
-          <a href="www.sogang.ac.kr">mog</a>
-          {/* "#" */}
+          <Link to={'/main'}>mog</Link>
         </BlogName>
       </TopLeftMenu>
       <TopRightMenu>
@@ -33,7 +39,7 @@ const PublishHeader = () => {
         </Button>
         <Button onClick={openMenuHandler}>PUBLISH</Button>
         <div style={{ display: isOpen ? 'block' : 'none' }}>
-          <PublishMenu />
+          <PublishMenu newPost={newPost} setNewPost={setNewPost} />
         </div>
       </TopRightMenu>
     </Wrap>

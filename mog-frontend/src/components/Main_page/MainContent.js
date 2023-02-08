@@ -1,16 +1,41 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import userPhotoImg from '../../images/user_profile(128px).png';
+import {
+  delete_all_search_result,
+  list_search_result,
+} from '../store/searchResult';
+import BlogContent from './BlogContent';
+import SearchContent from './SearchContent';
 
-const MainContent = () => {
-  const id = useSelector((state) => state.member.id);
+const MainContent = ({ keyword }) => {
+  const memberId = useSelector((state) => state.member.id);
   const nickname = useSelector((state) => state.member.nickname);
   const message = useSelector((state) => state.member.message);
 
-  console.log('MainContent-----------');
-  console.log(id);
-  console.log(nickname);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const searchPost = async () => {
+      await axios
+        .get(`/post/search/${memberId}/${keyword}`)
+        .then((res) => res.data)
+        .then((res) => {
+          if (res.length > 0) {
+            dispatch(list_search_result(res));
+          } else {
+            dispatch(delete_all_search_result());
+          }
+        })
+        .catch((err) => console.log(err));
+    };
+    searchPost();
+  }, [keyword]);
+
   return (
     <Wrap>
       <MainUserProfile>
@@ -20,6 +45,7 @@ const MainContent = () => {
           {message && <UserMsg>{message}</UserMsg>}
         </div>
       </MainUserProfile>
+      {keyword ? <SearchContent /> : <BlogContent />}
     </Wrap>
   );
 };

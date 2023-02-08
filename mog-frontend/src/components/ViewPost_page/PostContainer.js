@@ -1,9 +1,18 @@
+import axios from 'axios';
 import React, { useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import dotsImg from '../../images/dots.png';
 import ShareIcon from '../../images/share.png';
+import { delete_post } from '../store/post';
 
-const PostContainer = () => {
+const PostContainer = ({ category, post }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const nickname = useSelector((state) => state.member.nickname);
+
+  // 우측 상단 submit 창 open/hide
   const [isOpen, setIsOpen] = useState(false);
 
   const openSettingHandler = useCallback(() => {
@@ -11,16 +20,37 @@ const PostContainer = () => {
     setIsOpen(!isOpen);
   }, [isOpen]);
 
+  const onDeleteHandler = async () => {
+    const postId = post.id;
+    if (!postId) {
+      alert('죄송합니다! 잠시 후 다시 이용해주세요.');
+    } else {
+      await axios
+        .delete(`/post/delete/${postId}`)
+        .then((res) => {
+          if (res.status === 200) {
+            alert('게시글 삭제 완료!');
+            dispatch(delete_post(post));
+            navigate('/main');
+          }
+        })
+        .catch((err) => {
+          alert('죄송합니다! 잠시 후 다시 이용해주세요.');
+          console.log(err);
+        });
+    }
+  };
+
   return (
     <Wrap>
       <Title>
         <TitleBox>
-          <PostTitle>title</PostTitle>
-          <PostSubTitle>category</PostSubTitle>
+          <PostTitle>{post ? post.title : '제목'}</PostTitle>
+          <PostSubTitle>{category ? category.name : '카테고리'}</PostSubTitle>
           <div>
-            <PostWriter>작성자</PostWriter>
+            <PostWriter>{nickname ? nickname : '작성자'}</PostWriter>
 
-            <PostDate>등록날짜</PostDate>
+            <PostDate>{post ? post.updatedAt : '작성일'}</PostDate>
           </div>
         </TitleBox>
         <PostSettingBox>
@@ -28,8 +58,14 @@ const PostContainer = () => {
 
           {/* 게시글 수정 or 삭제 */}
           <PostSetting style={{ display: isOpen ? 'block' : 'none' }}>
-            <li>게시글 편집</li>
-            <li>게시글 삭제</li>
+            <li
+              onClick={() => {
+                navigate(`/post/update/${category.id}/${post.id}`);
+              }}
+            >
+              게시글 편집
+            </li>
+            <li onClick={onDeleteHandler}>게시글 삭제</li>
             {/* <li>
               공유하기
               <ShareImg />
@@ -38,7 +74,7 @@ const PostContainer = () => {
         </PostSettingBox>
       </Title>
 
-      <PostContent>content</PostContent>
+      <PostContent>{post ? post.content : '내용'}</PostContent>
     </Wrap>
   );
 };

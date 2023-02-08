@@ -99,7 +99,7 @@ public class MemberService {
                 }
             }
             // 탈퇴한 회원이 지금까지 쓴 게시글 모두 삭제
-            List<Post> postList = postRepository.findByMember_Id(member.getId());
+            List<Post> postList = postRepository.findByMember_IdOrderByUpdatedAtDesc(member.getId());
             if(postList != null || postList.size() > 0) {
                 for(Post p : postList) {
                     postRepository.delete(p);

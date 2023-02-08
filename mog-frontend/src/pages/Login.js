@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
-const Login = () => {
+const Login = ({ accessToken, setAccessToken }) => {
   const navigate = useNavigate();
 
   const [loginInfo, setLoginInfo] = useState({
@@ -35,6 +35,7 @@ const Login = () => {
         alert(`로그인 완료!`);
 
         localStorage.setItem('accessToken', res.data.accessToken);
+        setAccessToken(res.data.accessToken);
         navigate('/user');
       })
       .catch((err) => {

@@ -1,6 +1,7 @@
 package com.myblog.mogbackend.controller;
 
 import com.myblog.mogbackend.dto.CategoryDto;
+import com.myblog.mogbackend.dto.PostDto;
 import com.myblog.mogbackend.entity.Category;
 import com.myblog.mogbackend.service.CategoryService;
 import com.myblog.mogbackend.service.MemberService;
@@ -19,6 +20,10 @@ public class CategoryController {
     private final CategoryService categoryService;
     private final MemberService memberService;
 
+    @GetMapping("/{categoryId}")
+    public ResponseEntity<CategoryDto> getCategory(@PathVariable("categoryId") Long id) {
+        return ResponseEntity.ok(CategoryDto.toCategoryDto(categoryService.findCategoryById(id)));
+    }
    @GetMapping("/list/{id}") // id: memberId
     public ResponseEntity<List<CategoryDto>> categoryList(@PathVariable("id") Long id) {
         return ResponseEntity.ok(categoryService.categoryList(id));
@@ -30,7 +35,7 @@ public class CategoryController {
         Category category = new Category();
         category.setName(request.getName());
         category.setMember(memberService.findById(request.getMemberId()));
-        return ResponseEntity.ok(categoryService.write(category));
+        return ResponseEntity.ok(categoryService.writeCategory(category));
     }
 
     @DeleteMapping("/delete/{categoryId}")
@@ -45,7 +50,7 @@ public class CategoryController {
 //           throw new RuntimeException("categoryId(Long) type error");
 //       }
 
-        return new ResponseEntity<>(categoryService.delete(categoryId), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.deleteCategory(categoryId), HttpStatus.OK);
     }
 
     @PutMapping("/update")
@@ -53,6 +58,6 @@ public class CategoryController {
         Category categoryTemp = categoryService.findCategoryById(category.getId());
         categoryTemp.setName(category.getName());
 //        categoryService.write(categoryTemp);
-        return new ResponseEntity<>(categoryService.write(categoryTemp), HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.writeCategory(categoryTemp), HttpStatus.OK);
     }
 }

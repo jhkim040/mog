@@ -9,6 +9,8 @@ import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { FormWrap } from '../components/common/formStyle/FormWrap';
 import { delete_account_category } from '../components/store/category';
 import { delete_account } from '../components/store/member';
+import { delete_all_post } from '../components/store/post';
+import { delete_all_search_result } from '../components/store/searchResult';
 
 const DeleteAccount = () => {
   const { id, email, nickname, message, accessToken, isLogin } = useSelector(
@@ -50,8 +52,12 @@ const DeleteAccount = () => {
               alert('회원탈퇴 완료');
               dispatch(delete_account());
               dispatch(delete_account_category()); // 카테고리 정보 초기화
-              navigate('/');
+              dispatch(delete_all_post()); // 게시글 정보 초기화
+              dispatch(delete_all_search_result()); // 검색 정보 초기화
             }
+          })
+          .then((res) => {
+            navigate('/');
           })
           .catch((err) => {
             console.log(err);

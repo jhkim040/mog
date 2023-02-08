@@ -1,14 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const PublishContainer = () => {
+const PublishContainer = ({ newPost, setNewPost }) => {
+  const onChangeHandler = (e) => {
+    setNewPost({
+      ...newPost,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <Wrap>
       <PublishBox>
         <Title>
           <TitleBox>
             <PublishTitle>
-              <PublishTitleInput type="text" placeholder="제목" />
+              <PublishTitleInput
+                type="text"
+                placeholder="제목"
+                name="title"
+                onChange={onChangeHandler}
+                value={newPost.title}
+              />
             </PublishTitle>
             {/* <PublishSubTitle>
               <PublishSubTitleInput
@@ -24,7 +36,8 @@ const PublishContainer = () => {
           <ContentInput
             placeholder="내용을 입력하세요."
             name="content"
-            oninput='this.style.height = ""; this.style.height = this.scrollHeight + "px"'
+            onChange={onChangeHandler}
+            value={newPost.content}
           />
         </Content>
       </PublishBox>

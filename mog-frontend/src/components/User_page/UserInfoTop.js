@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import UserImage from '../../images/user_profile(128px).png';
 import { logout_category } from '../store/category';
 import { logout } from '../store/member';
+import { logout_post } from '../store/post';
+import { delete_all_search_result } from '../store/searchResult';
 
 const UserInfoTop = () => {
   const navigate = useNavigate();
@@ -14,7 +16,9 @@ const UserInfoTop = () => {
     alert('로그아웃 완료');
     dispatch(logout());
     dispatch(logout_category()); // 카테고리 정보 초기화
-    navigate('/');
+    dispatch(logout_post()); // 게시글 정보 초기화
+    dispatch(delete_all_search_result()); // 검색 정보 초기화
+    // navigate('/');
   };
   return (
     <Wrap>
@@ -30,7 +34,14 @@ const UserInfoTop = () => {
           >
             나의 게시글
           </Menu>
-          <Menu onClick={onLogoutHandler}>로그아웃</Menu>
+          <Menu
+            onClick={() => {
+              onLogoutHandler();
+              navigate('/');
+            }}
+          >
+            로그아웃
+          </Menu>
         </form>
       </UserImg>
     </Wrap>

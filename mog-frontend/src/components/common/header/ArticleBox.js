@@ -2,14 +2,25 @@ import axios from 'axios';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import MinusIcon from '../../../images/minus.png';
 import { delete_category } from '../../store/category';
+import { delete_all_post } from '../../store/post';
 
 const ArticleBox = () => {
   const categoryList = useSelector((state) => state.category.categoryList);
+  // console.log(categoryList);
+
+  const postList = useSelector((state) => state.post.postList);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // 카테고리 별 게시글 리스트
+  const filter_postList = (categoryId) => {
+    // console.log(postList);
+    return postList.filter((post) => post.categoryId === categoryId);
+  };
 
   // 카테고리 삭제
   const DeleteCategory = async (categoryId, category) => {
@@ -25,10 +36,12 @@ const ArticleBox = () => {
       await axios
         .delete(`/category/delete/${categoryId}`)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           if (res.status === 200) {
             alert('카테고리 삭제 완료');
-            dispatch(delete_category(category));
+            dispatch(delete_category(category)); // // 게시글 정보 초기화
+            dispatch(delete_all_post()); // 게시글 정보 초기화
+            navigate('/main');
           }
         })
         .catch((err) => {
@@ -44,21 +57,22 @@ const ArticleBox = () => {
         categoryList.map((category) => (
           <div key={category.id}>
             <CategoryTitle>
-              <Link to={''}>
-                {/* {category.id} */}
-                {category.name}
-              </Link>
+              <Link to={`/post/search/${category.name}`}>{category.name}</Link>
               <DeleteIcon
                 onClick={() => {
-                  console.log(category);
                   DeleteCategory(category.id, category);
                 }}
               />
             </CategoryTitle>
             <ul>
-              <SingleArticle>
-                <Link to={''}></Link>
-              </SingleArticle>
+              {filter_postList(category.id).length > 0 &&
+                filter_postList(category.id).map((post) => (
+                  <SingleArticle key={post.id}>
+                    <Link to={`/post/view/${category.id}/${post.id}`}>
+                      {post.title}
+                    </Link>
+                  </SingleArticle>
+                ))}
             </ul>
           </div>
         ))

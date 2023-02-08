@@ -58,6 +58,7 @@ const member = (state = initState, action) => {
 
     case LOGOUT:
       localStorage.clear();
+      // console.log('member logout');
       return initState;
 
     case DELETE_ACCOUNT:
