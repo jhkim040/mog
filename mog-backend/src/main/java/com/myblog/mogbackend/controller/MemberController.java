@@ -3,10 +3,10 @@ package com.myblog.mogbackend.controller;
 import com.myblog.mogbackend.dto.ChangePasswordRequestDto;
 import com.myblog.mogbackend.dto.MemberRequestDto;
 import com.myblog.mogbackend.dto.MemberResponseDto;
+import com.myblog.mogbackend.service.EmailService;
 import com.myblog.mogbackend.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/member")
 public class MemberController {
     private final MemberService memberService;
+    private final EmailService emailService;
+
 
 // 세션에 저장할 때 사용
 //    @GetMapping("/me")
@@ -53,7 +55,7 @@ public class MemberController {
 
     @PutMapping("/password")
     public ResponseEntity<MemberResponseDto> setMemberPassword(@RequestBody ChangePasswordRequestDto request) {
-        return ResponseEntity.ok(memberService.changeMemberPassword(request.getEmail(), request.getExPassword(), request.getNewPassword()));
+        return ResponseEntity.ok(memberService.changeMemberPassword_withEmailAndExPassword(request.getEmail(), request.getExPassword(), request.getNewPassword()));
     }
 
     @PutMapping("/message")
@@ -66,5 +68,15 @@ public class MemberController {
     @PostMapping("/account")
     public ResponseEntity<?> deleteByEmailandPw(@RequestBody MemberRequestDto request) {
         return new ResponseEntity<>(memberService.deleteByEmailandPw(request.getEmail(), request.getPassword()), HttpStatus.OK);
+    }
+
+    @PostMapping("/sendPwEmail")
+    public ResponseEntity<?> sendPwEmail(@RequestBody MemberRequestDto request) throws Exception {
+        String email = request.getEmail();
+        String randomPassword = emailService.sendSimpleMessage(email);
+        log.info("임시 비밀번호 :" + randomPassword);
+
+        // 임시 비밀번호로 수정
+        return new ResponseEntity<>(emailService.sendSimpleMessage(email), HttpStatus.OK);
     }
 }

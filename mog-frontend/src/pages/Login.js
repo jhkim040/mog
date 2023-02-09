@@ -75,13 +75,23 @@ const Login = ({ accessToken, setAccessToken }) => {
           </Button>
           <Button
             style={ButtonStyle}
-            variant="secondary"
+            variant="success"
             type="button"
             onClick={() => {
               navigate('/signup');
             }}
           >
             Signup
+          </Button>
+          <Button
+            style={ButtonStyle}
+            variant="dark"
+            type="button"
+            onClick={() => {
+              navigate('/findAccount');
+            }}
+          >
+            Find PW
           </Button>
         </div>
       </Form>

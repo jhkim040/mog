@@ -109,7 +109,7 @@ const SearchBox = styled.div`
 const SearchBtn = styled.button`
   display: inline-block;
   width: 2rem;
-  height: 2rem;
+  height: 1.8rem;
   background: url(${searchIcon}) no-repeat center center;
   background-size: contain;
   cursor: pointer;

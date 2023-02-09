@@ -88,7 +88,7 @@ const DeleteAccount = () => {
           </Button>
           <Button
             style={ButtonStyle}
-            variant="secondary"
+            variant="success"
             type="button"
             onClick={() => {
               navigate('/user');

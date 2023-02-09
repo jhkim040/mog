@@ -27,6 +27,7 @@ import {
   logout_post,
 } from './components/store/post';
 import { logout_search_result } from './components/store/searchResult';
+import FindPassword from './pages/FindPassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -122,6 +123,7 @@ function App() {
 
         <Route path="/main" exact={true} element={<Main />} />
         <Route path="/user" exact={true} element={<User />} />
+        <Route path="/findAccount" exact={true} element={<FindPassword />} />
       </Routes>
     </BrowserRouter>
   );

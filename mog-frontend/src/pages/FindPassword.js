@@ -1,24 +1,17 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
 import { FlexBox } from '../components/common/formStyle/FlexBox';
 import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { FormWrap } from '../components/common/formStyle/FormWrap';
-import { change_message } from '../components/store/member';
 
-const ChangeMessage = () => {
-  const { id, email, nickname, message, accessToken, isLogin } = useSelector(
-    (state) => state.member,
-  );
-  const dispatch = useDispatch();
+const FindPassword = () => {
   const navigate = useNavigate();
 
   const [memberInfo, setMemberInfo] = useState({
-    email: email,
-    message: '',
+    email: '',
   });
 
   const onChangeHandler = (e) => {
@@ -30,21 +23,20 @@ const ChangeMessage = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    if (memberInfo.message === '') {
-      alert('상태 메시지를 확인해주세요');
+    if (!memberInfo.email.trim()) {
+      alert('입력하신 이메일을 확인해주세요!');
     } else {
       await axios
-        .put('/member/message', memberInfo)
+        .post('/member/sendPwEmail', memberInfo)
         .then((res) => {
-          console.log('닉네임 변경');
+          //   console.log('닉네임 변경');
           console.log(res.data);
-
-          alert(`상태메시지 변경 완료!`);
-          dispatch(change_message(memberInfo));
-          navigate('/user');
+          if (res.status === 200) {
+            alert(`입력하신 이메일로 임시 비밀번호를 전송했습니다.`);
+          }
         })
         .catch((err) => {
-          alert('닉네임 변경 에러');
+          alert('죄송합니다. 잠시 후 다시 이용바랍니다.');
           console.log(err);
         });
     }
@@ -55,28 +47,28 @@ const ChangeMessage = () => {
       <FormLogo />
       <Form onSubmit={onSubmitHandler}>
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>New Message</Form.Label>
+          <Form.Label>Email</Form.Label>
           <Form.Control
-            name="message"
-            type="text"
-            placeholder="What do you feel right now?"
+            name="email"
+            type="email"
+            placeholder="Enter Your Email"
             onChange={onChangeHandler}
             autoComplete="off"
           />
         </Form.Group>
         <div style={FlexBox}>
           <Button style={ButtonStyle} variant="primary" type="submit">
-            Update
+            Find PW
           </Button>
           <Button
             style={ButtonStyle}
             variant="success"
             type="button"
             onClick={() => {
-              navigate('/user');
+              navigate('/');
             }}
           >
-            Main Page
+            Login
           </Button>
         </div>
       </Form>
@@ -84,4 +76,4 @@ const ChangeMessage = () => {
   );
 };
 
-export default ChangeMessage;
+export default FindPassword;

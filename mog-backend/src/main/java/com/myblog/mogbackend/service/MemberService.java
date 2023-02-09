@@ -8,11 +8,19 @@ import com.myblog.mogbackend.repository.CategoryRepository;
 import com.myblog.mogbackend.repository.MemberRepository;
 import com.myblog.mogbackend.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Session;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
+
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +29,12 @@ public class MemberService {
     private final CategoryRepository categoryRepository;
     private final PasswordEncoder passwordEncoder;
     private final PostRepository postRepository;
+
+    @Transactional(readOnly = true)
+    public boolean existByEmail(String email) {
+        return memberRepository.existsByEmail(email);
+    }
+
 
     @Transactional(readOnly = true)
     public Member findById(Long id) {
@@ -49,8 +63,9 @@ public class MemberService {
     }
 
     // 비밀번호 변경
+    // 이메일, 기존 비밀번호, 새로운 비밀번호 입력
     @Transactional
-    public MemberResponseDto changeMemberPassword(String email, String exPassword, String newPassword) {
+    public MemberResponseDto changeMemberPassword_withEmailAndExPassword(String email, String exPassword, String newPassword) {
 //        Member member = memberRepository.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
         if(newPassword.trim() == "") {
             throw new RuntimeException("new password blank");
@@ -61,6 +76,21 @@ public class MemberService {
         if (!passwordEncoder.matches(exPassword, member.getPassword())) {
             throw new RuntimeException("Incorrect Password");
         }
+        member.setPassword(passwordEncoder.encode((newPassword)));
+        return MemberResponseDto.of(memberRepository.save(member));
+    }
+
+    // 비밀번호 변경
+    // 이메일, 새로운 비밀번호 입력
+    @Transactional
+    public MemberResponseDto changeMemberPassword_withEmail(String email, String newPassword) {
+//        Member member = memberRepository.findById(SecurityUtil.getCurrentMemberId()).orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
+        if(newPassword.trim() == "") {
+            throw new RuntimeException("new password blank");
+        }
+        Member member = memberRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("no such member"));
+
         member.setPassword(passwordEncoder.encode((newPassword)));
         return MemberResponseDto.of(memberRepository.save(member));
     }

@@ -19,5 +19,15 @@ spring:
         format_sql: true
         show_sql: true
 
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: pjhkim0408@naver.com
+    password:
+    properties:
+      mail:smtp.auth: true
+      mail.smtp.ssl.enable: true
+      mail.smtp.ssl.trust: smtp.naver.com
+
 jwt:
   secret: qwertyuiop123456789qwertyuiop123456789qwertyuiop123456789

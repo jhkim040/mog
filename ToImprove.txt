@@ -1,15 +1,9 @@
 Member
 - image file
-- DeleteMapping --> RequestBody XX
-- find password
-
-
-Category
-- FK(member) 
-- update category
-- delete category
-- add category --> scroll
 
 Post
-- FK(member, category)
-- order by timestamp
+- share(KAKAO TALK)
+
+
+- JUnit Test
+- deploy?
