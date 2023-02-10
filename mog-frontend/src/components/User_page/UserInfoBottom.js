@@ -44,7 +44,8 @@ const UserInfoBottom = () => {
           수정하기
         </UserEdit>
       </SingleInfo>
-
+      <br />
+      <br />
       <br />
       <br />
       <UserEdit
@@ -78,12 +79,12 @@ const SingleInfo = styled.div`
   align-items: center;
 `;
 
-const SingleUserInfo = styled.div`
+const SingleUserInfo = styled.h2`
   font-size: 1.25rem;
 `;
 
-const Info = styled.div`
-  margin-left: 2rem;
+const Info = styled.h2`
+  margin-left: 4rem;
   font-size: 1.25rem;
   color: rgb(102, 100, 255);
 `;

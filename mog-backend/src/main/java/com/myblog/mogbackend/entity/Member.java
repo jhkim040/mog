@@ -31,6 +31,8 @@ public class Member {
     @Column(nullable = true)
     private String message;
 
+
+
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
@@ -63,6 +65,7 @@ public class Member {
     public void setMessage(String message) {
         this.message = message;
     }
+
 
     @Builder
     public Member(Long id, String email, String password, String nickname, String message, Authority authority){

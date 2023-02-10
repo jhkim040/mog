@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -20,21 +20,59 @@ const UserInfoTop = () => {
     dispatch(delete_all_search_result()); // 검색 정보 초기화
     // navigate('/');
   };
+
+  const imgRef = useRef(null);
+
+  const [profileImg, setProfileImg] = useState('');
+  // 프로필 이미지 업로드
+  const load_profileImg = () => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      const img = reader.result;
+      setProfileImg(img);
+    };
+  };
+
+  // 프로필 이미지 삭제
+  const delete_profileImg = () => {
+    setProfileImg('');
+  };
+
+  // 프로필 이미지 UI
+  const UserProfileImg = styled.div`
+    width: 9.375rem;
+    height: 9.375rem;
+    border-radius: 50%;
+    background: url(${profileImg ? profileImg : UserImage}) no-repeat center;
+    background-size: cover;
+  `;
+
   return (
     <Wrap>
       <UserProfileImg />
       <UserImg>
         <form>
-          <Menu>이미지 변경</Menu>
-          <Menu>이미지 삭제</Menu>
+          <Menu htmlFor="profileImg">이미지 변경</Menu>
+          <ProfileImgInput
+            type="file"
+            name="profileImg"
+            id="profileImg"
+            onChange={load_profileImg}
+            ref={imgRef}
+          />
           <Menu
+            type="button"
             onClick={() => {
-              navigate('/main');
+              setProfileImg('');
             }}
           >
-            나의 게시글
+            이미지 삭제
           </Menu>
+          <Menu onClick={delete_profileImg}>나의 게시글</Menu>
           <Menu
+            type="button"
             onClick={() => {
               onLogoutHandler();
               navigate('/');
@@ -69,16 +107,11 @@ const UserImg = styled.div`
   /* z-index: -1; */
 `;
 
-const UserProfileImg = styled.div`
-  width: 9.375rem;
-  height: 9.375rem;
-  border-radius: 50%;
-  background: url(${UserImage}) no-repeat center;
-`;
-
-const Menu = styled.button`
+const Menu = styled.label`
   width: 90%;
   height: 1.8rem;
+  text-align: center;
+  padding-top: 0.15rem;
   margin: 0.625rem auto;
   display: block;
   font-weight: bold;
@@ -92,4 +125,8 @@ const Menu = styled.button`
     color: #fff;
     transition: 0.2s;
   }
+`;
+
+const ProfileImgInput = styled.input`
+  display: none;
 `;
