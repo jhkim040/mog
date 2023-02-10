@@ -22,11 +22,11 @@ const UserInfoTop = () => {
   };
   return (
     <Wrap>
+      <UserProfileImg />
       <UserImg>
         <form>
-          <UserProfileImg />
-          {/* <UserImgChange>이미지 변경</UserImgChange>
-          <UserImgDelete>이미지 삭제</UserImgDelete> */}
+          <Menu>이미지 변경</Menu>
+          <Menu>이미지 삭제</Menu>
           <Menu
             onClick={() => {
               navigate('/main');
@@ -51,21 +51,22 @@ const UserInfoTop = () => {
 export default UserInfoTop;
 
 const Wrap = styled.div`
-  width: 100%;
-  display: flex;
+  padding-right: 2rem;
+  border-right: 0.125rem solid #cfcfcf;
 `;
 
 const UserImg = styled.div`
   position: relative;
-  /* z-index: -1; */
-  &::after {
+
+  /* &::after {
     position: absolute;
     content: '';
     height: 13rem;
     top: 0.8rem;
     margin-left: 10rem;
     border-right: 0.125rem solid #cfcfcf;
-  }
+  } */
+  /* z-index: -1; */
 `;
 
 const UserProfileImg = styled.div`

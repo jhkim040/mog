@@ -20,6 +20,8 @@ export default User;
 
 const UserInfoContainer = styled.div`
   margin-top: 9.375rem;
-  width: 49rem;
+  width: 43rem;
   margin-inline: auto;
+  display: flex;
+  justify-content: center;
 `;
