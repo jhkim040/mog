@@ -16,6 +16,7 @@ public class MemberResponseDto {
     private String email;
     private String nickname;
     private String message;
+    private String storedFileName;
 
     public static MemberResponseDto of(Member member) {
         return MemberResponseDto.builder()
@@ -23,6 +24,7 @@ public class MemberResponseDto {
                 .email(member.getEmail())
                 .nickname(member.getNickname())
                 .message(member.getMessage())
+                .storedFileName(member.getStoredFileName())
                 .build();
     }
 }

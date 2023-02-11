@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.persistence.Column;
+
 // Request를 받을 때
 @Getter
 @AllArgsConstructor
@@ -21,6 +23,10 @@ public class MemberRequestDto {
     private String nickname;
     private String message;
 
+    private String originalFileName;
+
+    private String storedFileName;
+
     public Member toMember(PasswordEncoder passwordEncoder) {
         return Member.builder()
                 .id(id)
@@ -29,6 +35,8 @@ public class MemberRequestDto {
                 .nickname(nickname)
                 .message(message)
                 .authority(Authority.ROLE_USER)
+                .originalFileName(originalFileName)
+                .storedFileName(storedFileName)
                 .build();
     }
 

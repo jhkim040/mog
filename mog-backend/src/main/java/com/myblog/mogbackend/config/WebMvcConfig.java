@@ -2,6 +2,7 @@ package com.myblog.mogbackend.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 // MemberController에 도달하기 전에
@@ -21,4 +22,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         // 애플리케이션 실행 --> 인터셉터를 등록하고 아래 주소로 들어오는 요청 기다림
         registry.addInterceptor(bearerAuthInterceptor).addPathPatterns("/member/me");
     }
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/**").addResourceLocations("file:///C:/gitRepository/mog/mog-backend/src/main/profile_images/");
+//    }
 }

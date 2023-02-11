@@ -12,14 +12,10 @@ import org.hibernate.Session;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
-
-
+import java.util.*;
 
 
 @Service
@@ -29,6 +25,8 @@ public class MemberService {
     private final CategoryRepository categoryRepository;
     private final PasswordEncoder passwordEncoder;
     private final PostRepository postRepository;
+
+    private final FileHandler fileHandler;
 
     @Transactional(readOnly = true)
     public boolean existByEmail(String email) {
@@ -49,6 +47,27 @@ public class MemberService {
                 .orElseThrow(() -> new RuntimeException("no such member"));
     }
 
+    @Transactional
+    public MemberResponseDto changeProfileImage(Long memberId, List<MultipartFile> files) throws Exception {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("no such member"));
+        // 파일을 저장하고 그 Board 에 대한 list 를 가지고 있는다
+        List<Member> list = fileHandler.parseFileInfo(memberId, files);
+
+        if (list.isEmpty()){
+            throw new RuntimeException("[error] : no profile image found");
+        }
+        // 파일에 대해 DB에 저장하고 가지고 있을 것
+        else{
+            List<Member> pictureBeans = new ArrayList<>();
+            for (Member m : list) {
+                pictureBeans.add(memberRepository.save(m));
+            }
+        }
+
+        return MemberResponseDto.of(memberRepository.save(member));
+
+    }
 
     // 닉네임 변경
     @Transactional
@@ -121,18 +140,18 @@ public class MemberService {
             return "fail";
         } else {
 //            Member member = memberRepository.findByEmail(email).get();
-            // 탈퇴한 회원이 지금까지 쓴 카테고리 모두 삭제
-            List<Category> categoryList = categoryRepository.findByMember_Id(member.getId());
-            if(categoryList != null || categoryList.size() > 0) {
-                for(Category c : categoryList) {
-                    categoryRepository.delete(c);
-                }
-            }
             // 탈퇴한 회원이 지금까지 쓴 게시글 모두 삭제
             List<Post> postList = postRepository.findByMember_IdOrderByUpdatedAtDesc(member.getId());
             if(postList != null || postList.size() > 0) {
                 for(Post p : postList) {
                     postRepository.delete(p);
+                }
+            }
+            // 탈퇴한 회원이 지금까지 쓴 카테고리 모두 삭제
+            List<Category> categoryList = categoryRepository.findByMember_Id(member.getId());
+            if(categoryList != null || categoryList.size() > 0) {
+                for (Category c : categoryList) {
+                    categoryRepository.delete(c);
                 }
             }
             // 회원정보 삭제

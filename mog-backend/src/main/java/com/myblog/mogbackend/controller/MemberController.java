@@ -9,9 +9,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Slf4j
 @CrossOrigin
@@ -61,6 +64,12 @@ public class MemberController {
     @PutMapping("/message")
     public ResponseEntity<MemberResponseDto> setMemberMessage(@RequestBody MemberRequestDto request) {
         return ResponseEntity.ok(memberService.changeMemberMessage(request.getEmail(), request.getMessage()));
+    }
+    @PostMapping("/profileImage/{memberId}")
+    public ResponseEntity<MemberResponseDto> setProfileImage(@PathVariable Long memberId,
+                                                             @Validated @RequestParam("image") List<MultipartFile> files) throws Exception {
+        log.info(files.toString());
+                return ResponseEntity.ok(memberService.changeProfileImage(memberId, files));
     }
 
 

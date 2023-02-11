@@ -4,6 +4,7 @@ export const DELETE_ACCOUNT = 'DELETE_ACCOUNT';
 export const CHANGE_NICKNAME = 'CHANGE_NICKNAME';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const CHANGE_MESSAGE = 'CHANGE_MESSAGE';
+export const CHANGE_PROFILE_IMAGE = 'CHANGE_PROFILE_IMAGE';
 
 // action
 export const login = (member) => ({
@@ -33,12 +34,18 @@ export const change_message = (member) => ({
   payload: member,
 });
 
+export const change_profile_image = (member) => ({
+  type: CHANGE_PROFILE_IMAGE,
+  payload: member,
+});
+
 // state
 const initState = {
   id: 0,
   email: '',
   nickname: '',
   message: '',
+  storedFileName: '',
   accessToken: '',
   isLogin: false,
 };
@@ -52,6 +59,7 @@ const member = (state = initState, action) => {
         email: action.payload.email,
         nickname: action.payload.nickname,
         message: action.payload.message,
+        storedFileName: action.payload.storedFileName,
         accessToken: localStorage.getItem('accessToken'),
         isLogin: true,
       };
@@ -80,7 +88,11 @@ const member = (state = initState, action) => {
         ...state,
         message: action.payload.message,
       };
-
+    case CHANGE_PROFILE_IMAGE:
+      return {
+        ...state,
+        storedFileName: action.payload.storedFileName,
+      };
     default:
       return state;
   }

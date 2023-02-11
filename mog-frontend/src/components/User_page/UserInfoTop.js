@@ -1,12 +1,13 @@
-import React, { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserImage from '../../images/user_profile(128px).png';
 import { logout_category } from '../store/category';
-import { logout } from '../store/member';
+import { change_profile_image, logout } from '../store/member';
 import { logout_post } from '../store/post';
 import { delete_all_search_result } from '../store/searchResult';
+import axios from 'axios';
 
 const UserInfoTop = () => {
   const navigate = useNavigate();
@@ -21,9 +22,19 @@ const UserInfoTop = () => {
     // navigate('/');
   };
 
-  const imgRef = useRef(null);
+  const memberId = useSelector((state) => state.member.id);
+  const user_profile_image = useSelector(
+    (state) => state.member.storedFileName,
+  );
 
-  const [profileImg, setProfileImg] = useState('');
+  const imgRef = useRef(null);
+  const profile_image_box = useRef(null);
+
+  useEffect(() => {
+    profile_image_box.current.style.background = `url() no-repeat center`;
+    profile_image_box.current.style.backgroundSize = `cover`;
+  }, [user_profile_image]);
+
   // 프로필 이미지 업로드
   const load_profileImg = () => {
     const file = imgRef.current.files[0];
@@ -31,30 +42,95 @@ const UserInfoTop = () => {
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       const img = reader.result;
-      setProfileImg(img);
+
+      dispatch(
+        change_profile_image({
+          storedFileName: img,
+        }),
+      );
+      // profile_image_box.current.style.background = `url(${img}) no-repeat
+      // center`;
+      // profile_image_box.current.style.backgroundSize = `cover`;
     };
   };
 
   // 프로필 이미지 삭제
   const delete_profileImg = () => {
-    setProfileImg('');
+    dispatch(
+      change_profile_image({
+        storedFileName: '',
+      }),
+    );
+    profile_image_box.current.style.background = `url(${UserImage}) no-repeat
+      center`;
   };
 
-  // 프로필 이미지 UI
-  const UserProfileImg = styled.div`
-    width: 9.375rem;
-    height: 9.375rem;
-    border-radius: 50%;
-    background: url(${profileImg ? profileImg : UserImage}) no-repeat center;
-    background-size: cover;
-  `;
+  // 이미지 업로드
+  const onUploadImage = useCallback(async (e) => {
+    const profile_image = imgRef.current.files;
+    console.log(profile_image[0]);
+    if (!profile_image) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', profile_image[0]);
+    // console.log(formData);
+    if (!memberId) {
+      alert('죄송합니다. 잠시 후 다시 이용해주세요');
+      return;
+    }
+    await axios
+      .post(`/member/profileImage/${memberId}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          alert('프로필 이미지 변경 완료!');
+          dispatch(change_profile_image(res));
+        }
+      })
+      .then((res) => navigate('/user'))
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   return (
     <Wrap>
-      <UserProfileImg />
+      <UserProfileImg ref={profile_image_box} />
       <UserImg>
         <form>
-          <Menu htmlFor="profileImg">이미지 변경</Menu>
+          {user_profile_image ? (
+            <>
+              <Menu onClick={onUploadImage}>이미지 저장</Menu>
+              <Menu
+                onClick={() => {
+                  navigate('/user');
+                }}
+              >
+                변경 취소
+              </Menu>
+            </>
+          ) : (
+            <>
+              <Menu htmlFor="profileImg">이미지 변경</Menu>
+              <Menu
+                onClick={() => {
+                  dispatch(
+                    change_profile_image({
+                      storedFileName: '',
+                    }),
+                  );
+                }}
+              >
+                이미지 삭제
+              </Menu>
+            </>
+          )}
           <ProfileImgInput
             type="file"
             name="profileImg"
@@ -62,17 +138,9 @@ const UserInfoTop = () => {
             onChange={load_profileImg}
             ref={imgRef}
           />
-          <Menu
-            type="button"
-            onClick={() => {
-              setProfileImg('');
-            }}
-          >
-            이미지 삭제
-          </Menu>
+
           <Menu onClick={delete_profileImg}>나의 게시글</Menu>
           <Menu
-            type="button"
             onClick={() => {
               onLogoutHandler();
               navigate('/');
@@ -125,6 +193,15 @@ const Menu = styled.label`
     color: #fff;
     transition: 0.2s;
   }
+`;
+
+// 프로필 이미지 UI
+const UserProfileImg = styled.div`
+  width: 9.375rem;
+  height: 9.375rem;
+  border-radius: 50%;
+  background: url(${UserImage}) no-repeat center;
+  background-size: cover;
 `;
 
 const ProfileImgInput = styled.input`

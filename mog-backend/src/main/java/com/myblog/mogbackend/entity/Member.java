@@ -31,6 +31,14 @@ public class Member {
     @Column(nullable = true)
     private String message;
 
+    @Column(nullable = true)
+    private String originalFileName;
+
+    @Column(nullable = true)
+    private String storedFileName;
+
+    private Long fileSize;
+
 
 
     @Enumerated(EnumType.STRING)
@@ -66,16 +74,24 @@ public class Member {
         this.message = message;
     }
 
+    public void setOriginalFileName(String originalFileName) { this.originalFileName = originalFileName; }
+    public void setStoredFileName(String storedFileName) { this.storedFileName = storedFileName; }
+
+    public void setFileSize(Long fileSize) { this.fileSize = fileSize; }
+
+
 
     @Builder
-    public Member(Long id, String email, String password, String nickname, String message, Authority authority){
+    public Member(Long id, String email, String password, String nickname, String message, Authority authority,
+                  String originalFileName, String storedFileName){
         this.id = id;
         this.email = email;
         this.password = password;
         this.nickname = nickname;
         this.message = message;
         this.authority = authority;
-//        this.categories = categories;
+        this.originalFileName = originalFileName;
+        this.storedFileName = storedFileName;
     }
 
 
