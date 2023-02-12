@@ -5,6 +5,20 @@ server:
       enabled: true
 
 spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+
+
+  servlet:
+    multipart:
+      #      file-size-threshold: 1MB
+      # top directory : mog-backend
+      location: src/main/resources/static/image/   #ex > local
+      max-file-size: 100MB
+      max-request-size: 100MB
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -7,11 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 
 @RequiredArgsConstructor
 @Configuration
@@ -49,7 +52,7 @@ public class WebSecurityConfig {
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/auth/**", "/member/**", "/category/**", "/post/**").permitAll()
+                .antMatchers("/auth/**", "/member/**", "/category/**", "/post/**","/image/**").permitAll()
                 // 모든 Requests에 있어서 /auth/**를 제외한 모든 uri의 request는 토큰이 필요
                 // /auth/**는 로그인 페이지
                 .anyRequest().authenticated()
@@ -61,4 +64,6 @@ public class WebSecurityConfig {
 
         return http.build();
     }
+
+
 }

@@ -3,6 +3,8 @@ package com.myblog.mogbackend.controller;
 import com.myblog.mogbackend.dto.ChangePasswordRequestDto;
 import com.myblog.mogbackend.dto.MemberRequestDto;
 import com.myblog.mogbackend.dto.MemberResponseDto;
+import com.myblog.mogbackend.entity.Member;
+import com.myblog.mogbackend.repository.MemberRepository;
 import com.myblog.mogbackend.service.EmailService;
 import com.myblog.mogbackend.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
+    private final MemberRepository memberRepository;
     private final MemberService memberService;
     private final EmailService emailService;
 
@@ -71,8 +74,11 @@ public class MemberController {
         log.info(files.toString());
                 return ResponseEntity.ok(memberService.changeProfileImage(memberId, files));
     }
-
-
+    // 프로필 이미지 삭제
+    @DeleteMapping("/profileImage/delete/{memberId}")
+    public ResponseEntity<MemberResponseDto> setProfileImage(@PathVariable Long memberId) {
+        return ResponseEntity.ok(memberService.deleteProfileImage(memberId));
+    }
     // 회원탈퇴 이메일, 암호 필요
     @PostMapping("/account")
     public ResponseEntity<?> deleteByEmailandPw(@RequestBody MemberRequestDto request) {

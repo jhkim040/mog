@@ -3,6 +3,7 @@ package com.myblog.mogbackend.service;
 import com.myblog.mogbackend.entity.Member;
 import com.myblog.mogbackend.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,9 @@ import java.util.List;
 public class FileHandler {
 
     private final MemberRepository memberRepository;
+
+    @Value("${spring.servlet.multipart.location}")
+    private String uploadImagePath;
 
     public List<Member> parseFileInfo(
             Long memberId,
@@ -45,8 +49,8 @@ public class FileHandler {
         String absolutePath = new File("").getAbsolutePath() + "\\";
 
         // 경로를 지정하고 그곳에다가 저장
-        String path = "../mog-frontend/src/profile_images/" + current_date;
-//        String path = "image/" + current_date;
+//        String path = uploadImagePath + current_date;
+        String path = uploadImagePath;
         File file = new File(path);
         // 저장할 위치의 디렉토리가 존지하지 않을 경우
         if (!file.exists()) {
@@ -83,7 +87,9 @@ public class FileHandler {
                 Member member = memberRepository.findById(memberId)
                         .orElseThrow(() -> new RuntimeException("no such member"));
                 member.setOriginalFileName(multipartFile.getOriginalFilename());
-                member.setStoredFileName(path + "/" + new_file_name);
+//                member.setStoredFileName(path + "/" + new_file_name);
+//                member.setStoredFileName(current_date + "/" + new_file_name);
+                member.setStoredFileName(new_file_name);
                 member.setFileSize(multipartFile.getSize());
                 memberRepository.save(member);
                 fileList.add(member);

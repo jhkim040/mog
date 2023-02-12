@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -15,9 +15,11 @@ const MainContent = ({ keyword }) => {
   const memberId = useSelector((state) => state.member.id);
   const nickname = useSelector((state) => state.member.nickname);
   const message = useSelector((state) => state.member.message);
+  const profile_image = useSelector((state) => state.member.storedFileName);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user_profile_photo = useRef(null);
 
   useEffect(() => {
     const searchPost = async () => {
@@ -34,12 +36,17 @@ const MainContent = ({ keyword }) => {
         .catch((err) => console.log(err));
     };
     searchPost();
-  }, [keyword]);
+    if (profile_image) {
+      user_profile_photo.current.src = `http://localhost:8080/image/${profile_image}`;
+    } else {
+      user_profile_photo.current.src = userPhotoImg;
+    }
+  }, [keyword, profile_image]);
 
   return (
     <Wrap>
       <MainUserProfile>
-        <UserPhoto />
+        <UserPhoto ref={user_profile_photo} />
         <div>
           {nickname && <UserName>{nickname}</UserName>}
           {message && <UserMsg>{message}</UserMsg>}
@@ -68,12 +75,13 @@ const MainUserProfile = styled.div`
   justify-content: center;
 `;
 
-const UserPhoto = styled.div`
+const UserPhoto = styled.img`
   width: 9.375rem;
   height: 9.375rem;
   margin-right: 6.25rem;
-  background: url(${userPhotoImg}) no-repeat center;
-  background-size: contain;
+  /* background: url(${userPhotoImg}) no-repeat center;
+  background-size: contain; */
+  border-radius: 50%;
   @media (max-width: 536px) {
     margin-right: 1.5625rem;
   }

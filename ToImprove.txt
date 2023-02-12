@@ -1,6 +1,3 @@
-Member
-- image file
-
 Post
 - share(KAKAO TALK)
 

@@ -69,6 +69,7 @@ public class MemberService {
 
     }
 
+
     // 닉네임 변경
     @Transactional
     public MemberResponseDto changeMemberNickname(String email, String nickname) {
@@ -120,6 +121,15 @@ public class MemberService {
         Member member = memberRepository.findByEmail(email).
                 orElseThrow(() -> new RuntimeException("no such member"));
         member.setMessage(newMessage);
+        return MemberResponseDto.of(memberRepository.save(member));
+    }
+    @Transactional
+    public MemberResponseDto deleteProfileImage(Long memberId) {
+        Member member = memberRepository.findById(memberId).
+                orElseThrow(() -> new RuntimeException("no such member"));
+        member.setOriginalFileName("");
+        member.setStoredFileName("");
+        member.setFileSize(null);
         return MemberResponseDto.of(memberRepository.save(member));
     }
 

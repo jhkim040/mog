@@ -30,39 +30,68 @@ const UserInfoTop = () => {
   const imgRef = useRef(null);
   const profile_image_box = useRef(null);
 
+  const [changeImage, setChangeImage] = useState(false);
+
   useEffect(() => {
-    profile_image_box.current.style.background = `url() no-repeat center`;
-    profile_image_box.current.style.backgroundSize = `cover`;
-  }, [user_profile_image]);
+    console.log(user_profile_image);
+    if (user_profile_image) {
+      profile_image_box.current.src = `http://localhost:8080/image/${user_profile_image}`;
+    } else {
+      profile_image_box.current.src = UserImage;
+    }
+  }, []);
 
   // 프로필 이미지 업로드
   const load_profileImg = () => {
+    setChangeImage(true);
     const file = imgRef.current.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onloadend = () => {
       const img = reader.result;
 
-      dispatch(
-        change_profile_image({
-          storedFileName: img,
-        }),
-      );
-      // profile_image_box.current.style.background = `url(${img}) no-repeat
-      // center`;
-      // profile_image_box.current.style.backgroundSize = `cover`;
+      // dispatch(
+      //   change_profile_image({
+      //     storedFileName: img,
+      //   }),
+      // );
+      profile_image_box.current.src = img;
     };
   };
 
   // 프로필 이미지 삭제
-  const delete_profileImg = () => {
-    dispatch(
-      change_profile_image({
-        storedFileName: '',
-      }),
-    );
-    profile_image_box.current.style.background = `url(${UserImage}) no-repeat
-      center`;
+  const delete_profileImg = async () => {
+    if (!memberId) {
+      alert('죄송합니다. 잠시 후 이용해주세요.');
+      return;
+    }
+
+    const ans = window.confirm('정말 삭제하시겠습니까?');
+    if (!ans) {
+      return;
+    }
+
+    await axios
+      .delete(`/member/profileImage/delete/${memberId}`)
+      .then((res) => {
+        console.log(res.data);
+        if (res.status === 200) {
+          alert('프로필 이미지 삭제 완료!');
+          dispatch(change_profile_image(res.data));
+          setChangeImage(false);
+          dispatch(
+            change_profile_image({
+              storedFileName: '',
+            }),
+          );
+        }
+      })
+
+      .catch((error) => {
+        console.error(error);
+      });
+
+    profile_image_box.current.src = UserImage;
   };
 
   // 이미지 업로드
@@ -70,6 +99,7 @@ const UserInfoTop = () => {
     const profile_image = imgRef.current.files;
     console.log(profile_image[0]);
     if (!profile_image) {
+      setChangeImage(false);
       return;
     }
 
@@ -89,8 +119,11 @@ const UserInfoTop = () => {
       .then((res) => {
         console.log(res.data);
         if (res.status === 200) {
+          console.log(res.data);
           alert('프로필 이미지 변경 완료!');
-          dispatch(change_profile_image(res));
+          dispatch(change_profile_image(res.data));
+          setChangeImage(false);
+          console.log(user_profile_image);
         }
       })
       .then((res) => navigate('/user'))
@@ -101,15 +134,18 @@ const UserInfoTop = () => {
 
   return (
     <Wrap>
-      <UserProfileImg ref={profile_image_box} />
+      <div>
+        <UserProfileImg ref={profile_image_box} />
+      </div>
       <UserImg>
         <form>
-          {user_profile_image ? (
+          {changeImage ? (
             <>
               <Menu onClick={onUploadImage}>이미지 저장</Menu>
               <Menu
                 onClick={() => {
-                  navigate('/user');
+                  setChangeImage(false);
+                  profile_image_box.current.src = `http://localhost:8080/image/${user_profile_image}`;
                 }}
               >
                 변경 취소
@@ -118,17 +154,7 @@ const UserInfoTop = () => {
           ) : (
             <>
               <Menu htmlFor="profileImg">이미지 변경</Menu>
-              <Menu
-                onClick={() => {
-                  dispatch(
-                    change_profile_image({
-                      storedFileName: '',
-                    }),
-                  );
-                }}
-              >
-                이미지 삭제
-              </Menu>
+              <Menu onClick={delete_profileImg}>이미지 삭제</Menu>
             </>
           )}
           <ProfileImgInput
@@ -139,7 +165,13 @@ const UserInfoTop = () => {
             ref={imgRef}
           />
 
-          <Menu onClick={delete_profileImg}>나의 게시글</Menu>
+          <Menu
+            onClick={() => {
+              navigate('/main');
+            }}
+          >
+            나의 게시글
+          </Menu>
           <Menu
             onClick={() => {
               onLogoutHandler();
@@ -196,12 +228,12 @@ const Menu = styled.label`
 `;
 
 // 프로필 이미지 UI
-const UserProfileImg = styled.div`
+const UserProfileImg = styled.img`
   width: 9.375rem;
   height: 9.375rem;
   border-radius: 50%;
-  background: url(${UserImage}) no-repeat center;
-  background-size: cover;
+  /* background: url(${UserImage}) no-repeat center;
+  background-size: cover; */
 `;
 
 const ProfileImgInput = styled.input`
