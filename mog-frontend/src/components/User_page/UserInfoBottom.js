@@ -13,7 +13,18 @@ const UserInfoBottom = () => {
     <Wrap>
       <SingleInfo>
         <SingleUserInfo>이메일</SingleUserInfo>
-        <Info>{email ? email : '로그인 해주세요'}</Info>
+        {/* <Info>{email ? email : '로그인 해주세요'}</Info> */}
+        {email ? (
+          <Info>{email}</Info>
+        ) : (
+          <Info
+            onClick={() => {
+              navigate('/');
+            }}
+          >
+            로그인 해주세요
+          </Info>
+        )}
         <UserEdit
           onClick={() => {
             navigate('/password');
@@ -87,6 +98,11 @@ const Info = styled.h2`
   margin-left: 4rem;
   font-size: 1.25rem;
   color: rgb(102, 100, 255);
+
+  cursor: pointer;
+  &:hover {
+    opacity: 0.6;
+  }
 `;
 
 const UserEdit = styled.span`

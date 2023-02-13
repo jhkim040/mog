@@ -145,7 +145,11 @@ const UserInfoTop = () => {
               <Menu
                 onClick={() => {
                   setChangeImage(false);
-                  profile_image_box.current.src = `http://localhost:8080/image/${user_profile_image}`;
+                  if (user_profile_image) {
+                    profile_image_box.current.src = `http://localhost:8080/image/${user_profile_image}`;
+                  } else {
+                    profile_image_box.current.src = UserImage;
+                  }
                 }}
               >
                 변경 취소
