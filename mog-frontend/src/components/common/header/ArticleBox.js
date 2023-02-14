@@ -105,6 +105,7 @@ const CategoryTitle = styled.h2`
 `;
 
 const SingleArticle = styled.li`
+  width: 4.3rem;
   color: #000;
   text-align: left;
   font-size: 0.875rem;
@@ -117,6 +118,9 @@ const SingleArticle = styled.li`
   & :hover {
     opacity: 0.6;
   }
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const DeleteIcon = styled.i`
