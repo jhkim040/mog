@@ -96,6 +96,10 @@ Personal Blog Made with ***ReactJS, Spring Boot***
     * Enter an email, a password, a nickname, a message(optional)
     * An entered email has to be a real email, since the email can be used for finding the password of your account.
   * *Log in with an account*
+    * For security, every password is saved with being encrpyted by HMAC SHA 256. 
+    * If sign-up process is done, every single user is issued own access token.
+    * When you get logged-in, your access token is saved in the local-storage of your browser.
+    * The token is used to access your account.
   * *Finding a password with a registered email*
     * A temporary random password will be sent to your email.
   * *Change your account-information*
@@ -104,6 +108,10 @@ Personal Blog Made with ***ReactJS, Spring Boot***
   * *Delete an account*
     * For safety, your present password has to be entered to delete your account.
     * If an account is deleted, every post and category in the account is also deleted at the same time.  
+  * *Register/update/delete a profile image
+    * You can register your own profile image at the 'user page'
+    * Also, you can delete or change your profile image.
+    * If there is no image saved, then common profile image will be applied.
 * **Category**
   * *Add a new category*
     * A new category can be added at the side category menu(located left in the main page)
@@ -129,6 +137,9 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 * Enter an email, a password, a nickname, a message(optional)
 * An entered email has to be a real email, since the email can be used for finding the password of your account.
 ## *Log in with an account*
+* For security, every password is saved with being encrpyted by HMAC SHA 256. 
+* If sign-up process is done, every single user is issued own access token.
+* When you get logged-in, your access token is saved in the local-storage of your browser.
 ## *Finding a password with a registered email*
 * A temporary random password will be sent to your email.
 ## *Change your account-information*
@@ -137,6 +148,10 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 ## *Delete an account*
 * For safety, your present password has to be entered to delete your account.
 * If an account is deleted, every post and category in the account is also deleted at the same time.  
+## *Register/update/delete a profile image
+* You can register your own profile image at the 'user page'
+* Also, you can delete or change your profile image.
+* If there is no image saved, then common profile image will be applied.
 # **Category**
 ## *Add a new category*
 * A new category can be added at the side category menu(located left in the main page)
