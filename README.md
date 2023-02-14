@@ -129,7 +129,7 @@ Personal Blog Made with ***ReactJS, Spring Boot***
     * For safety, your present password has to be entered to delete your account.
     * If an account is deleted, every post and category in the account is also deleted at the same time.   
    
-  * *Register/update/delete a profile image
+  * *Register/update/delete a profile image*
 
     * If there is no image saved, then common profile image will be applied.
     * You can delete or change your profile image.
