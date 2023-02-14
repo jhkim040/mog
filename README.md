@@ -288,10 +288,15 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 
   * *Search a post*
     * You can search a post with a title you are looking for with the search input on the header of your screen.
-   
-    ![image](https://user-images.githubusercontent.com/105581574/218762112-2d07dc33-1506-4c36-897b-052a6c3b3ee1.png)
+    * If you search with empty input, the result brings all of the posts.
     
-    ![searchpost](https://user-images.githubusercontent.com/105581574/218763775-5b1c04b8-7cb2-4f39-923e-a7b3598ac3cb.png)
+    ![image](https://user-images.githubusercontent.com/105581574/218765069-20553e21-beba-45e8-983c-b9cd8a458c70.png)
+    
+    ![searchposts](https://user-images.githubusercontent.com/105581574/218765388-ce84227a-e9a3-4a39-a46b-243a0e70ec80.png)
+    
+    * no post found
+    
+    ![image](https://user-images.githubusercontent.com/105581574/218765727-b0ec092a-efb0-4fc2-b919-6af5a67b15c7.png)
 
 ------------
 # 📚Troubleshooting
