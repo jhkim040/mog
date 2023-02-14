@@ -106,6 +106,8 @@ Personal Blog Made with ***ReactJS, Spring Boot***
     * The authorization allows each member to approach own user-information.
     
     * When you get logged-in, your access token is saved in the local-storage of your browser.  
+
+    * The access token is expired after 30 minutes.
     
     * If you log-out, the local-storage will be empty.
 
