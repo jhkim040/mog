@@ -148,7 +148,7 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 # **Post**
 ## *Add a post*
 * In order to add a post, a category must exist in advance.
-* A new post can only belong to a category already exists.
+* A new post can only belong to a category which already exists.
 ## *Delete a post*
 ## *Update a post*
 * Whenever a post is updated, updated time is saved automatically.
