@@ -6,6 +6,7 @@ import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
 import { FlexBox } from '../components/common/formStyle/FlexBox';
 import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { FormWrap } from '../components/common/formStyle/FormWrap';
+import ThemeMsg from '../components/common/formStyle/ThemeMsg';
 
 const FindPassword = () => {
   const navigate = useNavigate();
@@ -43,36 +44,39 @@ const FindPassword = () => {
   };
 
   return (
-    <FormWrap>
-      <FormLogo />
-      <Form onSubmit={onSubmitHandler}>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            name="email"
-            type="email"
-            placeholder="Enter Your Email"
-            onChange={onChangeHandler}
-            autoComplete="off"
-          />
-        </Form.Group>
-        <div style={FlexBox}>
-          <Button style={ButtonStyle} variant="primary" type="submit">
-            Find PW
-          </Button>
-          <Button
-            style={ButtonStyle}
-            variant="success"
-            type="button"
-            onClick={() => {
-              navigate('/');
-            }}
-          >
-            Login
-          </Button>
-        </div>
-      </Form>
-    </FormWrap>
+    <>
+      <FormWrap>
+        <FormLogo />
+        <Form onSubmit={onSubmitHandler}>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="Enter Your Email"
+              onChange={onChangeHandler}
+              autoComplete="off"
+            />
+          </Form.Group>
+          <div style={FlexBox}>
+            <Button style={ButtonStyle} variant="primary" type="submit">
+              Find PW
+            </Button>
+            <Button
+              style={ButtonStyle}
+              variant="success"
+              type="button"
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              Login
+            </Button>
+          </div>
+        </Form>
+      </FormWrap>
+      <ThemeMsg />
+    </>
   );
 };
 

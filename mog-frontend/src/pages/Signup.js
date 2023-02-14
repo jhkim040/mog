@@ -8,6 +8,7 @@ import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import ThemeMsg from '../components/common/formStyle/ThemeMsg';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -52,68 +53,71 @@ const Signup = () => {
   };
 
   return (
-    <FormWrap>
-      <FormLogo />
+    <>
+      <FormWrap>
+        <FormLogo />
 
-      <Form onSubmit={onSignupHandler}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            name="email"
-            type="email"
-            placeholder="Enter email"
-            autoComplete="off"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
+        <Form onSubmit={onSignupHandler}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="Enter email"
+              autoComplete="off"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Nickname</Form.Label>
-          <Form.Control
-            name="nickname"
-            type="text"
-            placeholder="Nickname"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Nickname</Form.Label>
+            <Form.Control
+              name="nickname"
+              type="text"
+              placeholder="Nickname"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>Message (optional)</Form.Label>
-          <Form.Control
-            name="message"
-            type="text"
-            placeholder="What do you feel right now?"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Message (optional)</Form.Label>
+            <Form.Control
+              name="message"
+              type="text"
+              placeholder="What do you feel right now?"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
 
-        <div style={FlexBox}>
-          <Button style={ButtonStyle} variant="primary" type="submit">
-            Signup
-          </Button>
-          <Button
-            style={ButtonStyle}
-            variant="success"
-            type="button"
-            onClick={() => {
-              navigate('/');
-            }}
-          >
-            Login
-          </Button>
-        </div>
-      </Form>
-    </FormWrap>
+          <div style={FlexBox}>
+            <Button style={ButtonStyle} variant="primary" type="submit">
+              Signup
+            </Button>
+            <Button
+              style={ButtonStyle}
+              variant="success"
+              type="button"
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              Login
+            </Button>
+          </div>
+        </Form>
+      </FormWrap>
+      <ThemeMsg />
+    </>
   );
 };
 

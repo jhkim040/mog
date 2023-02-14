@@ -13,6 +13,11 @@
 }
 
 @font-face {
+  font-family: 'Hurricane-Regular';
+  src: url('./fonts/Hurricane-Regular.ttf');
+}
+
+@font-face {
   font-family: 'BAUHS93R';
   src: url('./fonts/Bauhaus\ 93\ Regular.ttf');
 }

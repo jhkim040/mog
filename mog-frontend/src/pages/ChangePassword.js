@@ -7,6 +7,7 @@ import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
 import { FlexBox } from '../components/common/formStyle/FlexBox';
 import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { FormWrap } from '../components/common/formStyle/FormWrap';
+import ThemeMsg from '../components/common/formStyle/ThemeMsg';
 import { change_password } from '../components/store/member';
 
 const ChangePassword = () => {
@@ -54,45 +55,48 @@ const ChangePassword = () => {
   };
 
   return (
-    <FormWrap>
-      <FormLogo />
-      <Form onSubmit={onSubmitHandler}>
-        <Form.Group className="mb-3">
-          <Form.Label>Your Password</Form.Label>
-          <Form.Control
-            name="exPassword"
-            type="password"
-            placeholder="Ex Password"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
+    <>
+      <FormWrap>
+        <FormLogo />
+        <Form onSubmit={onSubmitHandler}>
+          <Form.Group className="mb-3">
+            <Form.Label>Your Password</Form.Label>
+            <Form.Control
+              name="exPassword"
+              type="password"
+              placeholder="Ex Password"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3">
-          <Form.Label>New Password</Form.Label>
-          <Form.Control
-            name="newPassword"
-            type="password"
-            placeholder="New Password"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
-        <div style={FlexBox}>
-          <Button style={ButtonStyle} variant="primary" type="submit">
-            Update
-          </Button>
-          <Button
-            style={ButtonStyle}
-            variant="success"
-            type="button"
-            onClick={() => {
-              navigate('/user');
-            }}
-          >
-            Main Page
-          </Button>
-        </div>
-      </Form>
-    </FormWrap>
+          <Form.Group className="mb-3">
+            <Form.Label>New Password</Form.Label>
+            <Form.Control
+              name="newPassword"
+              type="password"
+              placeholder="New Password"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
+          <div style={FlexBox}>
+            <Button style={ButtonStyle} variant="primary" type="submit">
+              Update
+            </Button>
+            <Button
+              style={ButtonStyle}
+              variant="success"
+              type="button"
+              onClick={() => {
+                navigate('/user');
+              }}
+            >
+              Main Page
+            </Button>
+          </div>
+        </Form>
+      </FormWrap>
+      <ThemeMsg />
+    </>
   );
 };
 

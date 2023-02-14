@@ -7,6 +7,7 @@ import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
 import { FlexBox } from '../components/common/formStyle/FlexBox';
 import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { FormWrap } from '../components/common/formStyle/FormWrap';
+import ThemeMsg from '../components/common/formStyle/ThemeMsg';
 import { change_nickname } from '../components/store/member';
 
 const ChangeNickname = () => {
@@ -51,36 +52,39 @@ const ChangeNickname = () => {
   };
 
   return (
-    <FormWrap>
-      <FormLogo />
-      <Form onSubmit={onSubmitHandler}>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>New Nickname</Form.Label>
-          <Form.Control
-            name="nickname"
-            type="text"
-            placeholder="New Nickname"
-            onChange={onChangeHandler}
-            autoComplete="off"
-          />
-        </Form.Group>
-        <div style={FlexBox}>
-          <Button style={ButtonStyle} variant="primary" type="submit">
-            Update
-          </Button>
-          <Button
-            style={ButtonStyle}
-            variant="success"
-            type="button"
-            onClick={() => {
-              navigate('/user');
-            }}
-          >
-            Main Page
-          </Button>
-        </div>
-      </Form>
-    </FormWrap>
+    <>
+      <FormWrap>
+        <FormLogo />
+        <Form onSubmit={onSubmitHandler}>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>New Nickname</Form.Label>
+            <Form.Control
+              name="nickname"
+              type="text"
+              placeholder="New Nickname"
+              onChange={onChangeHandler}
+              autoComplete="off"
+            />
+          </Form.Group>
+          <div style={FlexBox}>
+            <Button style={ButtonStyle} variant="primary" type="submit">
+              Update
+            </Button>
+            <Button
+              style={ButtonStyle}
+              variant="success"
+              type="button"
+              onClick={() => {
+                navigate('/user');
+              }}
+            >
+              Main Page
+            </Button>
+          </div>
+        </Form>
+      </FormWrap>
+      <ThemeMsg />
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import ThemeMsg from '../components/common/formStyle/ThemeMsg';
 
 const Login = ({ accessToken, setAccessToken }) => {
   const navigate = useNavigate();
@@ -45,57 +46,60 @@ const Login = ({ accessToken, setAccessToken }) => {
   };
 
   return (
-    <FormWrap>
-      <FormLogo />
+    <>
+      <FormWrap>
+        <FormLogo />
 
-      <Form onSubmit={onLoginHandler}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            name="email"
-            type="email"
-            placeholder="Enter email"
-            autoComplete="off"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
+        <Form onSubmit={onLoginHandler}>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              name="email"
+              type="email"
+              placeholder="Enter email"
+              autoComplete="off"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
-        <div style={FlexBox}>
-          <Button style={ButtonStyle} variant="primary" type="submit">
-            Login
-          </Button>
-          <Button
-            style={ButtonStyle}
-            variant="success"
-            type="button"
-            onClick={() => {
-              navigate('/signup');
-            }}
-          >
-            Signup
-          </Button>
-          <Button
-            style={ButtonStyle}
-            variant="dark"
-            type="button"
-            onClick={() => {
-              navigate('/findAccount');
-            }}
-          >
-            Find PW
-          </Button>
-        </div>
-      </Form>
-    </FormWrap>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Password"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
+          <div style={FlexBox}>
+            <Button style={ButtonStyle} variant="primary" type="submit">
+              Login
+            </Button>
+            <Button
+              style={ButtonStyle}
+              variant="success"
+              type="button"
+              onClick={() => {
+                navigate('/signup');
+              }}
+            >
+              Signup
+            </Button>
+            <Button
+              style={ButtonStyle}
+              variant="dark"
+              type="button"
+              onClick={() => {
+                navigate('/findAccount');
+              }}
+            >
+              Find PW
+            </Button>
+          </div>
+        </Form>
+      </FormWrap>
+      <ThemeMsg />
+    </>
   );
 };
 

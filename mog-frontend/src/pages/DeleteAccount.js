@@ -7,6 +7,7 @@ import { ButtonStyle } from '../components/common/formStyle/ButtonStyle';
 import { FlexBox } from '../components/common/formStyle/FlexBox';
 import { FormLogo } from '../components/common/formStyle/FormLogo';
 import { FormWrap } from '../components/common/formStyle/FormWrap';
+import ThemeMsg from '../components/common/formStyle/ThemeMsg';
 import { delete_account_category } from '../components/store/category';
 import { delete_account } from '../components/store/member';
 import { delete_all_post } from '../components/store/post';
@@ -69,36 +70,39 @@ const DeleteAccount = () => {
   );
 
   return (
-    <FormWrap>
-      <FormLogo />
-      <Form onSubmit={DeleteAccountHandler}>
-        <Form.Group className="mb-3">
-          <Form.Label>Delete Your Account</Form.Label>
-          <Form.Control
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-            onChange={onChangeHandler}
-          />
-        </Form.Group>
+    <>
+      <FormWrap>
+        <FormLogo />
+        <Form onSubmit={DeleteAccountHandler}>
+          <Form.Group className="mb-3">
+            <Form.Label>Delete Your Account</Form.Label>
+            <Form.Control
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
 
-        <div style={FlexBox}>
-          <Button style={ButtonStyle} variant="primary" type="submit">
-            Delete
-          </Button>
-          <Button
-            style={ButtonStyle}
-            variant="success"
-            type="button"
-            onClick={() => {
-              navigate('/user');
-            }}
-          >
-            My Page
-          </Button>
-        </div>
-      </Form>
-    </FormWrap>
+          <div style={FlexBox}>
+            <Button style={ButtonStyle} variant="primary" type="submit">
+              Delete
+            </Button>
+            <Button
+              style={ButtonStyle}
+              variant="success"
+              type="button"
+              onClick={() => {
+                navigate('/user');
+              }}
+            >
+              My Page
+            </Button>
+          </div>
+        </Form>
+      </FormWrap>
+      <ThemeMsg />
+    </>
   );
 };
 
