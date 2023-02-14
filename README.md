@@ -10,14 +10,13 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 * *[Development Enviornment](#development-environment)*
 * *[Libraries and Frameworks](#libraries-and-frameworks)*
 * *[Project Structure](#project-structure)*
-* *[ERD]*
-* *[User Flow]*
-* *[Implemented Functions]*
-* *[Execution Screens]*
-* *[Troubleshooting]*
+* *[ERD](#erd)*
+* *[Implemented Functions](#implemented-functions)*
+* *[Execution Screens](#execution-screens)*
+* *[Troubleshooting](#troubleshooting)*
 
 
-
+------------
 # 📚Development Environment 
 
 ## 📌 Backend
@@ -43,7 +42,7 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 |CSS|3|
 |JavaScript|ES6|
 
-
+------------
 # 📚Libraries and Frameworks
 
 ### Check out build.gradle and package.json for furthermore information!
@@ -76,7 +75,7 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 |react-router-dom|6.8.0|
 |styled-components|5.3.6|
 
-
+------------
 # 📚Project Structure
 
 ## 📌 Frontend
@@ -85,5 +84,78 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 ## 📌 Backend
 ![image](https://user-images.githubusercontent.com/105581574/218664867-9cacaadf-2005-4b46-8515-e11f3b217d75.png)
 
+
+# 📚ERD
+![image](https://user-images.githubusercontent.com/105581574/218668563-3ee69c8c-164a-4a25-8615-b5319b1d9957.png)
+
+
+------------
+# 📚Implemented Functions
+* **Member**
+  * *Sign up an account*
+    * Enter an email, a password, a nickname, a message(optional)
+    * An entered email has to be a real email, since the email can be used for finding the password of your account.
+  * *Log in with an account*
+  * *Finding a password with a registered email*
+    * A temporary random password will be sent to your email.
+  * *Change your account-information*
+    * Your password, nickname, message can be changed anytime.
+    * In order to change your password, you must enter your present password.  
+  * *Delete an account*
+    * For safety, your present password has to be entered to delete your account.
+    * If an account is deleted, every post and category in the account is also deleted at the same time.  
+* **Category**
+  * *Add a new category*
+    * A new category can be added at the side category menu(located left in the main page)
+  * *Delete a category*
+    * A category can be deleted by clicking the minus-icon at the side category menu
+    * If a certain category is deleted, then every post of the category is also deleted simultaneously. 
+  * *Search a category*
+    * You can search a post with a category you are looking for with the search input on the header of your screen.
+* **Post**
+  * *Add a post*
+    * In order to add a post, a category must exist in advance.
+    * A new post can only belong to a category already exists.
+  * *Delete a post*
+  * *Update a post*
+    * Whenever a post is updated, updated time is saved automatically.
+  * *Search a post*
+    * You can search a post with a title you are looking for with the search input on the header of your screen.
+   
+------------
+# 📚Execution Screens
+# **Member**
+## *Sign up an account*
+* Enter an email, a password, a nickname, a message(optional)
+* An entered email has to be a real email, since the email can be used for finding the password of your account.
+## *Log in with an account*
+## *Finding a password with a registered email*
+* A temporary random password will be sent to your email.
+## *Change your account-information*
+* Your password, nickname, message can be changed anytime.
+* In order to change your password, you must enter your present password.  
+## *Delete an account*
+* For safety, your present password has to be entered to delete your account.
+* If an account is deleted, every post and category in the account is also deleted at the same time.  
+# **Category**
+## *Add a new category*
+* A new category can be added at the side category menu(located left in the main page)
+## *Delete a category*
+* A category can be deleted by clicking the minus-icon at the side category menu
+* If a certain category is deleted, then every post of the category is also deleted simultaneously. 
+## *Search a category*
+* You can search a post with a category you are looking for with the search input on the header of your screen.
+# **Post**
+## *Add a post*
+* In order to add a post, a category must exist in advance.
+* A new post can only belong to a category already exists.
+## *Delete a post*
+## *Update a post*
+* Whenever a post is updated, updated time is saved automatically.
+## *Search a post*
+* You can search a post with a title you are looking for with the search input on the header of your screen.
+
+------------
+# 📚Troubleshooting
 
 
