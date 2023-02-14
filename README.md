@@ -261,7 +261,7 @@ Personal Blog Made with ***ReactJS, Spring Boot***
   * *Search a category*
     * You can search a post with a category you are looking for with the search input on the header of your screen.
 
-    ![searchcate](https://user-images.githubusercontent.com/105581574/218763414-354f6781-ca40-4429-ad02-9ec04c2f3191.png)
+    ![findcate](https://user-images.githubusercontent.com/105581574/218766434-286583e3-4bf7-48d5-b3fd-973667d39010.png)
     
     
 * **Post**
