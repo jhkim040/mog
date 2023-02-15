@@ -13,8 +13,11 @@ const ThemeMsg = () => {
 export default ThemeMsg;
 
 const Msg = styled.h2`
+  width: 25rem;
+  text-align: center;
   font-family: 'Hurricane-Regular';
   font-size: 4rem;
 
   margin-top: 2rem;
+  margin-bottom: 5rem;
 `;

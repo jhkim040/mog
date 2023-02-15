@@ -57,8 +57,7 @@ const UserInfoBottom = () => {
       </SingleInfo>
       <br />
       <br />
-      <br />
-      <br />
+
       <UserEdit
         onClick={() => {
           navigate('/account');
@@ -81,6 +80,9 @@ const Wrap = styled.div`
   & > div {
     margin-block: 1rem;
   }
+  @media (max-width: 706px) {
+    margin-bottom: 4rem;
+  }
 `;
 
 const SingleInfo = styled.div`
@@ -88,6 +90,12 @@ const SingleInfo = styled.div`
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
+  @media (max-width: 706px) {
+    height: 7rem;
+    display: block;
+    margin-bottom: 4rem;
+    border-bottom: 0.125rem solid #cfcfcf;
+  }
 `;
 
 const SingleUserInfo = styled.h2`
@@ -97,11 +105,15 @@ const SingleUserInfo = styled.h2`
 const Info = styled.h2`
   margin-left: 4rem;
   font-size: 1.25rem;
+
   color: rgb(102, 100, 255);
 
   cursor: pointer;
   &:hover {
     opacity: 0.6;
+  }
+  @media (max-width: 706px) {
+    margin-left: 0;
   }
 `;
 
@@ -109,11 +121,15 @@ const UserEdit = styled.span`
   position: absolute;
   right: 0;
   color: red;
+  font-size: 1.25rem;
 
   cursor: pointer;
   &:hover {
     background-color: rgb(102, 100, 255);
     color: #fff;
     transition: 0.2s;
+  }
+  @media (max-width: 706px) {
+    margin-top: 0.7rem;
   }
 `;

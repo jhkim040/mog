@@ -26,4 +26,8 @@ const UserInfoContainer = styled.div`
   margin-inline: auto;
   display: flex;
   justify-content: center;
+  @media (max-width: 706px) {
+    width: 19.5rem;
+    display: block;
+  }
 `;

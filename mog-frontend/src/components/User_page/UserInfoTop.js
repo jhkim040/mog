@@ -193,8 +193,14 @@ const UserInfoTop = () => {
 export default UserInfoTop;
 
 const Wrap = styled.div`
+  width: 11.5rem;
   padding-right: 2rem;
   border-right: 0.125rem solid #cfcfcf;
+  @media (max-width: 706px) {
+    border-right: none;
+
+    margin: 0 auto;
+  }
 `;
 
 const UserImg = styled.div`
