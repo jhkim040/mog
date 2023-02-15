@@ -307,8 +307,41 @@ Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 ## 📌 Frontend
 
   * *media query*
+
+    * Every page is designed in responsive style with the media query so that all of the services can be provided naturally on any device.
+
+    ![image](https://user-images.githubusercontent.com/105581574/219059966-aa5e9e93-579d-4603-b057-3dd4a8e68c49.png)
+    
+    ![image](https://user-images.githubusercontent.com/105581574/219060361-698f7485-de1a-472e-a6b2-35850772ad27.png)
+    
+    ![image](https://user-images.githubusercontent.com/105581574/219060142-11f788b7-b05d-49f1-8f27-a963b6c6318f.png)
+    
+    ![image](https://user-images.githubusercontent.com/105581574/219061018-478188b9-98ca-4ee4-a0d4-adf706bcb94c.png)
+
+
+
   
   * *redux*
+
+    * If each data response is requested everytime whenever the frontend needs it, the server gets much burden and the performace of the program will be hindered.
+
+    * By saving data useful and irrelevant to security, such a problem can be solved. 
+
+    * Furthermore, by using redux each entity in the frontend is managed in global state and can be called out in any component. 
+
+      * file directory
+
+      ![image](https://user-images.githubusercontent.com/105581574/219061771-97ea59f7-6573-46cc-bf43-7332314564c8.png)
+
+      * comebine reducers
+
+      ![image](https://user-images.githubusercontent.com/105581574/219062540-1aa3bf4b-864b-49e1-bf53-fc4964857991.png)
+
+      * save data from the backend in the frontend using dispatchers
+
+      ![image](https://user-images.githubusercontent.com/105581574/219063496-265a9d22-9adf-4c7e-bdcc-023463c52ddd.png)
+
+
 
 ## 📌 Backend
 
