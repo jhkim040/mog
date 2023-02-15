@@ -1,6 +1,6 @@
 # mog
 
-Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
+A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 
 (*Production Period : 2023.01.31 ~ 2023.02.13*)  
   
