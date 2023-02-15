@@ -1,5 +1,6 @@
 # mog
-Personal Blog Made with ***ReactJS, Spring Boot***
+
+Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 
 (*Production Period : 2023.01.31 ~ 2023.02.13*)  
   
@@ -13,7 +14,7 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 * *[ERD](#erd)*
 * *[Implemented Functions](#implemented-functions)*
 * *[Execution Screens](#execution-screens)*
-* *[Troubleshooting](#troubleshooting)*
+* *[Extra Features](#extra-features)*
 
 
 ------------
@@ -301,6 +302,21 @@ Personal Blog Made with ***ReactJS, Spring Boot***
     ![image](https://user-images.githubusercontent.com/105581574/218765727-b0ec092a-efb0-4fc2-b919-6af5a67b15c7.png)
 
 ------------
-# 📚Troubleshooting
+# 📚Extra Features
+
+## 📌 Frontend
+
+  * *media query*
+  
+  * *redux*
+
+## 📌 Backend
+
+  * *Spring Security*
+
+  * *Spring mail*
+  
+  * *Associative Relation*
+
 
 
