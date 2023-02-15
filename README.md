@@ -172,7 +172,7 @@ Personal Blog Made with ***ReactJS, Spring Boot***
   * *Sign up an account*
     * Enter an email, a password, a nickname, a message(optional)  
       
-    ![image](https://user-images.githubusercontent.com/105581574/218747767-15e399f4-2f14-4816-aeba-b813d07f7f8b.png)
+    ![image](https://user-images.githubusercontent.com/105581574/219035257-f1ee4acb-8f5c-498c-9b44-e11caae46ef7.png)
 
     * For security, every password is saved with being encrpyted by HMAC SHA 256. 
 
@@ -182,11 +182,11 @@ Personal Blog Made with ***ReactJS, Spring Boot***
     
   * *Log in / out with an account*  
     
-    ![image](https://user-images.githubusercontent.com/105581574/218747932-2e7c66e4-bd69-4e13-9315-35c298276100.png)
+    ![image](https://user-images.githubusercontent.com/105581574/219035427-78031b84-408f-44b9-8099-bd7fe960a346.png)
 
     * If sign-up process is done, every single user gets authorization with being issued a certain access token.
 
-    ![image](https://user-images.githubusercontent.com/105581574/218746291-e1915ccf-d1ed-45e2-b676-4e93ba939bf7.png)
+    ![image](https://user-images.githubusercontent.com/105581574/219036833-6eba5402-d755-4560-a93c-0be4b14cf8f6.png)
 
     * The authorization allows each member to approach own user-information.
     * When you get logged-in, your access token is saved in the local-storage of your browser.  
@@ -195,13 +195,13 @@ Personal Blog Made with ***ReactJS, Spring Boot***
     
     * If you log-out, the local-storage will be empty.
       
-    ![logout](https://user-images.githubusercontent.com/105581574/218751975-4398a45a-6146-4782-a709-c4f2bb33c243.png)
+    ![logoutbutton](https://user-images.githubusercontent.com/105581574/219037043-e7188190-1bc6-456e-b887-07ecc9ad07c4.png)
 
     
   * *Finding a password with a registered email*
     * A temporary random password will be sent to your email.  
     
-    ![image](https://user-images.githubusercontent.com/105581574/218749011-603075d8-6b77-42de-b463-b924a4280836.png)
+    ![image](https://user-images.githubusercontent.com/105581574/219036160-ec9a3f30-555b-401a-a9bc-c54c3ff662e9.png)
     
     ![image](https://user-images.githubusercontent.com/105581574/218749123-e0645ed3-a768-410d-b479-544dc2cfd874.png)
     
@@ -209,41 +209,41 @@ Personal Blog Made with ***ReactJS, Spring Boot***
 
     
   * *Change your account-information*
-
-    ![changeinfo](https://user-images.githubusercontent.com/105581574/218751072-36ea1f69-168c-43d1-9d85-3711c8404d27.png)
-
+    
     * Your password, nickname, message can be changed anytime.  
     
-    ![changeinfo](https://user-images.githubusercontent.com/105581574/218752727-8db19f80-7e32-4a37-850d-12ca2f9cb1cd.png)
+    ![change](https://user-images.githubusercontent.com/105581574/219037517-827031b9-0e87-49ef-9a06-a7e27380099d.png)
     
-    ![image](https://user-images.githubusercontent.com/105581574/218750189-9a323e79-fc7a-41c3-ade9-64df44ee4133.png)
+    ![image](https://user-images.githubusercontent.com/105581574/219037694-e17b8bb8-c69b-48bc-abc3-374d9bc75460.png)
 
-    ![image](https://user-images.githubusercontent.com/105581574/218750259-5c3fb299-802e-4836-92b3-9e39e59e87f9.png)
+    ![image](https://user-images.githubusercontent.com/105581574/219037775-e536fdc3-5f17-4f9a-a10a-8a8665040760.png)
     
     * In order to change your password, you must enter your present password.    
     
-    ![image](https://user-images.githubusercontent.com/105581574/218749884-c7439e42-49ff-4312-9e1d-4e55b8c8b561.png)
+    ![image](https://user-images.githubusercontent.com/105581574/219037863-b8ffecec-de66-46a2-adef-748da2a247f0.png)
 
    
   * *Delete an account*
 
-    ![deleteaccount](https://user-images.githubusercontent.com/105581574/218752461-bff5eb21-907c-428a-b265-a6b4d30e0b73.png)
+    ![deleteacc](https://user-images.githubusercontent.com/105581574/219038064-a20d8639-93eb-40e0-aa1a-0490a16b13cc.png)
 
     * For safety, your present password has to be entered to delete your account.
+    
+    ![image](https://user-images.githubusercontent.com/105581574/219038126-fa622438-0696-4230-bbc6-073a4d94a01a.png)
+
     * If an account is deleted, every post and category in the account is also deleted at the same time.   
+   
    
   * *Register/update/delete a profile image
 
     * If there is no image saved, then common profile image will be applied.
     * You can delete or change your profile image.
 
-    ![changeprofile](https://user-images.githubusercontent.com/105581574/218754552-0940d1cc-dc7a-4136-a6bd-39d7f07f8835.png)
+    ![changeimg](https://user-images.githubusercontent.com/105581574/219038478-6dac501a-eb31-4197-8b50-c45d56dcca7d.png)
 
     * You can register your own profile image at the 'user page'
 
-    ![image](https://user-images.githubusercontent.com/105581574/218755198-91566f59-d95b-44fd-8e26-9a07328e9741.png)
-    
-    ![saveprofile](https://user-images.githubusercontent.com/105581574/218755746-18db3eb5-dced-4f7e-8d39-0c2e33cc7d85.png)
+   ![profileimg](https://user-images.githubusercontent.com/105581574/219038914-6905c6ca-04ec-45aa-bf21-fce04eae2627.png)
     
       
    
