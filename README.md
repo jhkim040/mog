@@ -235,7 +235,7 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
     * If an account is deleted, every post and category in the account is also deleted at the same time.   
    
    
-  * *Register/update/delete a profile image
+  * *Register/update/delete a profile image*
 
     * If there is no image saved, then common profile image will be applied.
     * You can delete or change your profile image.
@@ -356,7 +356,7 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
     
     
 
-    * register an interceptor used when a member gets log-in. The interceptor catches the designated request earlier than the MemberController does.  
+    * Register an interceptor used when a member gets log-in. The interceptor catches the designated request earlier than the MemberController does.  
     
     
     ![image](https://user-images.githubusercontent.com/105581574/220056398-e53792d7-fed0-405f-934e-addc10969100.png)
