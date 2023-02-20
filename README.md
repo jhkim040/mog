@@ -46,7 +46,7 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 ------------
 # 📚Libraries and Frameworks
 
-### Check out build.gradle and package.json for furthermore information!
+### Check out build.gradle and package.json for more information!
 
 ## 📌 Backend
 |Tool|Version|
