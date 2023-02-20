@@ -387,6 +387,35 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 
 
   * *Spring mail*
+
+    * When finding your password, the program can provide you a temporary email by sending it in an email.
+
+    * Enter the email and the password of your Naver account.
+
+
+    ![image](https://user-images.githubusercontent.com/105581574/220066742-6f4cbc30-ed55-4b26-bee8-27f7fbd2cb79.png)
+
+
+    * Such information is saved in the JavaMailSender Bean.
+    
+
+    ![image](https://user-images.githubusercontent.com/105581574/220065741-2defc0c2-2a2b-49c9-8532-4186aa122dc5.png)
+    
+
+    * Creating a temporary password. At the same time, your password is updated as well.
+    
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220066493-b7612fb9-7147-43c7-a8fb-99058ec8b46c.png)
+
+
+    * You can change the text of an email in EmailService.
+     
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220067084-a4f59e8f-d028-4336-9ada-da66dffa1854.png)
+
+
+
+    
   
   * *Associative Relation*
 
