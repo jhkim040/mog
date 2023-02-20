@@ -177,7 +177,7 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 
     * For security, every password is saved with being encrpyted by HMAC SHA 256. 
 
-    ![image](https://user-images.githubusercontent.com/105581574/218750566-3dc97415-645f-4154-be3f-a32ff17368e8.png)
+    ![image](https://user-images.githubusercontent.com/105581574/220045008-62061f52-7b5c-427f-a980-1302f26720d2.png)
 
     * An entered email has to be a real email, since the email can be used for finding the password of your account.
     
@@ -346,6 +346,37 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 ## 📌 Backend
 
   * *Spring Security*
+
+    * register an interceptor used when a member gets log-in. The interceptor catches the designated request earlier than the MemberController does.  
+    
+
+    ![image](https://user-images.githubusercontent.com/105581574/220056398-e53792d7-fed0-405f-934e-addc10969100.png)  
+    
+      
+    * Each member's existence is checked with his/her email.  
+    
+     
+    ![image](https://user-images.githubusercontent.com/105581574/220059444-e0539533-c15a-4855-9f9a-32f2005d7cbe.png)  
+    
+
+    * authenticate a log-in member with the provided token, and gives the member an authorization to approach his/her information.  
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220058213-db9d5966-df1a-4bf5-b11e-ab91d8488d19.png) 
+
+      * Extracting the access-token for checking an authentication.
+      
+    ![image](https://user-images.githubusercontent.com/105581574/220056953-825b8c21-33a2-4017-b759-3bfda3d2d89c.png)
+    
+      * The email set in the request is used when it goes to MemberController for approaching information.
+     
+    
+     
+    * If a member gets an authorization, his/her information is provided.
+     
+    ![image](https://user-images.githubusercontent.com/105581574/220060793-26805ba5-aa25-4222-bd91-9db29d08e5de.png)
+
+
+
 
   * *Spring mail*
   
