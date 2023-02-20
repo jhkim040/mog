@@ -16,7 +16,6 @@ public class BearerAuthInterceptor implements HandlerInterceptor {
         this.authExtractor = authExtractor;
         this.tokenProvider = tokenProvider;
     }
-
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) {

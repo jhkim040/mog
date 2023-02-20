@@ -10,13 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.io.UnsupportedEncodingException;
+
 import java.util.Random;
-import java.util.UUID;
+
 
 
 @PropertySource("classpath:application.yml")
@@ -36,7 +32,6 @@ public class EmailService {
 
     public String sendSimpleMessage(
             String to) {
-
         String subject = "[MOG] 임시 비밀번호 발행 안내";
         String text = "";
         String randomPassword = "";
@@ -58,7 +53,6 @@ public class EmailService {
             sb.append("회원가입 후 [MOG]의 다양한 기능을 이용해보세요!");
         }
         text = sb.toString();
-
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(username);
         message.setTo(to);
