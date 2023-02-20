@@ -346,6 +346,14 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 ## 📌 Backend
 
   * *Spring Security*
+    
+    * Enter your secret key. It is used in TokenProvider when creating an access token and authenticating a member.
+      
+      * Of course, a secret key must be sufficiently random and consistent while operating the program. 
+    
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220064471-1075cf66-2e64-4d9b-8cfc-234fcae2a352.png)
+    
 
     * register an interceptor used when a member gets log-in. The interceptor catches the designated request earlier than the MemberController does.  
     
