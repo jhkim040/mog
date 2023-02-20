@@ -352,13 +352,13 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
       * Of course, a secret key must be sufficiently random and consistent while operating the program. 
     
     
-    ![image](https://user-images.githubusercontent.com/105581574/220064471-1075cf66-2e64-4d9b-8cfc-234fcae2a352.png)
+    ![image](https://user-images.githubusercontent.com/105581574/220056398-e53792d7-fed0-405f-934e-addc10969100.png)
     
 
     * register an interceptor used when a member gets log-in. The interceptor catches the designated request earlier than the MemberController does.  
     
-
-    ![image](https://user-images.githubusercontent.com/105581574/220056398-e53792d7-fed0-405f-934e-addc10969100.png)  
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220064471-1075cf66-2e64-4d9b-8cfc-234fcae2a352.png)
     
       
     * Each member's existence is checked with his/her email.  
@@ -393,16 +393,16 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
     * Enter the email and the password of your Naver account.
 
 
-    ![image](https://user-images.githubusercontent.com/105581574/220066742-6f4cbc30-ed55-4b26-bee8-27f7fbd2cb79.png)
+    ![image](https://user-images.githubusercontent.com/105581574/220065741-2defc0c2-2a2b-49c9-8532-4186aa122dc5.png)
 
 
     * Such information is saved in the JavaMailSender Bean.
     
-
-    ![image](https://user-images.githubusercontent.com/105581574/220065741-2defc0c2-2a2b-49c9-8532-4186aa122dc5.png)
+    ![image](https://user-images.githubusercontent.com/105581574/220066742-6f4cbc30-ed55-4b26-bee8-27f7fbd2cb79.png)
+    
     
 
-    * Creating a temporary password. At the same time, your password is updated as well.
+    * Creating a temporary password. Once an email is sent, your password is updated as well.
     
     
     ![image](https://user-images.githubusercontent.com/105581574/220066493-b7612fb9-7147-43c7-a8fb-99058ec8b46c.png)
@@ -419,5 +419,28 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
   
   * *Associative Relation*
 
+    * Each category can be identified with an author(a member) who wrote it.
 
+    * Each post can be identified with an author(a member) who wrote it or a category which the post belongs to.
+
+    * Category
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220068434-88406c9e-87f8-4f58-95ed-ba83796fd56e.png)
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220069071-fc81986d-5526-43cf-b904-9f914f24f1c8.png)
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220069258-68b48920-15ae-4d6b-9961-da57b367bc49.png)
+
+
+
+    * Post
+
+    ![image](https://user-images.githubusercontent.com/105581574/220068565-d248a62a-c028-4e7e-be52-51d75f030e72.png)
+    
+    ![image](https://user-images.githubusercontent.com/105581574/220069130-e4111e21-8b97-4db0-9d5f-8073f72e2697.png)
+
+
+    * If an account is deleted, then every post and category written by the account is also removed.
+    
+    * If a category is deleted, then every post that belongs to the category is also removed.
 
