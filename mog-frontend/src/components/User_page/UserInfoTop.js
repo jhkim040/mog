@@ -198,7 +198,6 @@ const Wrap = styled.div`
   border-right: 0.125rem solid #cfcfcf;
   @media (max-width: 706px) {
     border-right: none;
-
     margin: 0 auto;
   }
 `;

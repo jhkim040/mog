@@ -11,3 +11,6 @@ const rootReducer = combineReducers({
   searchResult,
 });
 export default rootReducer;
+
+
+

@@ -54,6 +54,9 @@ const Wrap = styled.div`
     flex-wrap: wrap; */
   margin-inline: auto;
   padding-block: 9.375rem;
+  @media (max-width: 800px) {
+    width: 90vw;
+  }
 `;
 
 const PublishBox = styled.div`

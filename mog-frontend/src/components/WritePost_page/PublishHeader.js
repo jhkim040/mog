@@ -49,7 +49,7 @@ const PublishHeader = ({ newPost, setNewPost }) => {
 export default PublishHeader;
 
 const Wrap = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 5rem;
   padding: 1.25rem 0.7rem 0.7rem;
   display: flex;

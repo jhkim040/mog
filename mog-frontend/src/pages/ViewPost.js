@@ -70,4 +70,7 @@ export default ViewPost;
 const Wrap = styled.div`
   width: 49rem;
   margin-inline: auto;
+  @media (max-width: 800px) {
+    width: 90vw;
+  }
 `;

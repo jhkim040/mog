@@ -93,12 +93,14 @@ const Title = styled.div`
   display: flex;
   border-bottom: 0.125rem solid rgb(102, 100, 255);
   box-shadow: 0rem 1.25rem 1.25rem -1.125rem rgb(102, 100, 255, 0.2);
+  position: relative;
 `;
 
 const TitleBox = styled.div`
   width: 45rem;
   & > div {
     display: flex;
+    /* justify-content: space-between; */
   }
 `;
 
@@ -112,11 +114,17 @@ const PostSubTitle = styled.div`
 `;
 
 const PostWriter = styled.div`
+  /* width: 45%; */
   margin-right: 2rem;
+  /* overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; */
 `;
 
 const PostDate = styled.div`
-  position: relative;
+  /* width: 50%; */
+  position: absolute;
+  right: 1.5rem;
   z-index: -1;
   color: #cfcfcf;
   &::before {

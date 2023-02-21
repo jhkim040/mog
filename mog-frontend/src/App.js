@@ -42,6 +42,7 @@ function App() {
       let memberId = 0;
 
       if (accessToken) {
+        // get member data --> save in the frontend
         await axios
           .get('/member/me', {
             headers: {
@@ -58,6 +59,8 @@ function App() {
             alert('아이디 혹은 비밀번호를 확인해주세요!');
             console.log(err);
           });
+      
+          // get category data --> save in the frontend
         await axios
           .get(`/category/list/${memberId}`)
           .then((res) => res.data)
@@ -70,7 +73,7 @@ function App() {
           })
           .catch((err) => console.log(err));
 
-        // 회원이 작성한 전체 게시글
+          // get post data --> save in the frontend
         await axios
           .get(`/post/list/${memberId}`)
           .then((res) => res.data)
