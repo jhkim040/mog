@@ -96,7 +96,7 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
   * *Sign up an account*
     * Enter an email, a password, a nickname, a message(optional)  
 
-    * For security, every password is saved with being encrpyted by HMAC SHA 256. 
+    * For security, every password is encrpyted by Spring Security. 
 
     * An entered email has to be a real email, since the email can be used for finding the password of your account.
     
@@ -107,6 +107,8 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
     * The authorization allows each member to approach own user-information.
     
     * When you get logged-in, your access token is saved in the local-storage of your browser.  
+
+    * For security, every user-information is sent as a Json Web Token, encrpyted by HMAC SHA 256. 
 
     * The access token is expired after 30 minutes.
     
@@ -175,7 +177,7 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
       
     ![image](https://user-images.githubusercontent.com/105581574/219035257-f1ee4acb-8f5c-498c-9b44-e11caae46ef7.png)
 
-    * For security, every password is saved with being encrpyted by HMAC SHA 256. 
+    * For security, every password is encrpyted by Spring Security.
 
     ![image](https://user-images.githubusercontent.com/105581574/220045008-62061f52-7b5c-427f-a980-1302f26720d2.png)
 
@@ -191,6 +193,7 @@ A Personal Blog (Cloud Service) Made with ***ReactJS, Spring Boot***
 
     * The authorization allows each member to approach own user-information.
     * When you get logged-in, your access token is saved in the local-storage of your browser.  
+    * For security, every user-information is sent as a Json Web Token, encrpyted by HMAC SHA 256. 
     
     ![image](https://user-images.githubusercontent.com/105581574/218753247-87dfe248-7f2b-4483-bda4-25cc82fba59c.png)
     
